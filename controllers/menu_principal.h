@@ -1,7 +1,14 @@
 
 #include <stdio.h>
 
-void menu_principal(){
+#include "controle_clientes.h"
+#include "controle_funcionarios.h"
+#include "controle_veiculos.h"
+#include "controle_locacoes.h"
+#include "controle_financeiro.h"
+
+int menu_principal()
+{
 
     printf("=============== MENU PRINCIPAL ===============\n");
     printf("======    1 - Controle de locacoes      ======\n");
@@ -10,5 +17,10 @@ void menu_principal(){
     printf("======    4 - Controle de veiculos      ======\n");
     printf("======    5 - Controle do financeiro    ======\n");
     printf("==============================================\n");
-    
+
+    int choice;
+    printf("Digite a opcao desejada: ");
+    scanf("%d", &choice);
+
+    return choice;
 }
