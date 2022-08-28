@@ -16,6 +16,7 @@ int menu_principal()
     printf("======    3 - Controle de funcionarios  ======\n");
     printf("======    4 - Controle de veiculos      ======\n");
     printf("======    5 - Controle do financeiro    ======\n");
+    printf("======    0 - Encerrar Programa         ======\n");
     printf("==============================================\n");
 
     int choice;
