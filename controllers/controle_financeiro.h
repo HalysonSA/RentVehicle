@@ -22,11 +22,21 @@ int controle_financeiro()
         {
             // cadastrar_debito();
             printf("Cadastrar debito\n");
+            char nome_debito[50];
+            char numero_debito[16];
+            char validade_debito[4];
+            char cvv_debito[3];
+            char bandeira_debito[50];
         }
         else if (choice == 2)
         {
             // cadastrar_credito();
             printf("Cadastrar credito\n");
+            char nome_credito[50];
+            char numero_credito[16];
+            char validade_credito[4];
+            char cvv_credito[3];
+            char bandeira_credito[50];
         }
         else if (choice == 3)
         {

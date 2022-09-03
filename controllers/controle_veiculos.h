@@ -22,6 +22,8 @@ int controle_veiculos()
         {
             // cadastrar_veiculo();
             printf("Cadastrar veiculo\n");
+            char placa_carro[50];
+            char modelo_carro[50];
         }
         else if (choice == 2)
         {

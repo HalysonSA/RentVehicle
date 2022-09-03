@@ -23,6 +23,9 @@ int controle_locacoes()
         {
             // cadastrar_locacao();
             printf("Cadastrar locacao\n");
+            char cliente_locacao[50];
+            char carro_locacao[50];
+            char cartao_locacao[50];
         }
         else if (choice == 2)
         {

@@ -23,6 +23,8 @@ int controle_clientes()
         {
             // cadastrar_cliente();
             printf("Cadastrar cliente\n");
+            char nome_cliente[50];
+            char cpf_cliente[50];
         }
         else if (choice == 2)
         {

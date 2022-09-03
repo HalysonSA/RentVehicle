@@ -21,6 +21,8 @@ int controle_funcionarios()
         {
             // cadastrar_funcionario();
             printf("Cadastrar funcionario\n");
+            char nome_funcionario[50];
+            char cpf_funcionario[50];
         }
         else if (choice == 2)
         {
