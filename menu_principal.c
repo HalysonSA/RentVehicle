@@ -1,13 +1,9 @@
 
 #include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
 
-#include "controle_clientes.h"
-#include "controle_funcionarios.h"
-#include "controle_veiculos.h"
-#include "controle_locacoes.h"
-#include "controle_financeiro.h"
-
-int menu_principal()
+char menu_principal()
 {
 
     printf("=============== MENU PRINCIPAL ===============\n");
@@ -19,9 +15,12 @@ int menu_principal()
     printf("======    0 - Encerrar Programa         ======\n");
     printf("==============================================\n");
 
-    int choice;
+    char choice;
     printf("Digite a opcao desejada: ");
-    scanf("%d", &choice);
+    scanf("%c", &choice);
+    getchar();
+
+    system("cls");
 
     return choice;
 }

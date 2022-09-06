@@ -1,7 +1,11 @@
 #include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <ctype.h>
 
-int controle_funcionarios()
+char menu_funcionarios()
 {
+
     printf("=============================================\n");
     printf("======     CONTROLE DE FUNCIONARIOS    ======\n");
     printf("======    1 - Cadastrar funcionario    ======\n");
@@ -11,38 +15,43 @@ int controle_funcionarios()
     printf("======    0 - Voltar ao menu           ======\n");
     printf("=============================================\n");
 
-    int choice;
+    char choice;
     printf("Digite a opcao desejada: ");
-    scanf("%d", &choice);
+    scanf("%c", &choice);
+    getchar();
 
-    while (choice != 0)
+    return choice;
+}
+
+void controle_funcionarios()
+{
+    char choice = menu_funcionarios();
+
+    while (isdigit(choice) && choice != '0')
     {
-        if (choice == 1)
+        switch (choice)
         {
-            // cadastrar_funcionario();
+        case '1':
             printf("Cadastrar funcionario\n");
-            char nome_funcionario[50];
-            char cpf_funcionario[50];
-        }
-        else if (choice == 2)
-        {
-            // relatorio_funcionarios();
+            break;
+        case '2':
             printf("Relatorio funcionarios\n");
-        }
-        else if (choice == 3)
-        {
-            // editar_funcionario();
+            break;
+        case '3':
             printf("Editar funcionario\n");
-        }
-        else if (choice == 4)
-        {
-            // remover_funcionario();
+            break;
+        case '4':
             printf("Remover funcionario\n");
-        }
-        else
-        {
+            break;
+        default:
             printf("Opcao invalida\n");
+            break;
         }
-        return choice;
+
+        printf("Pressione enter para continuar...");
+        getchar();
+
+        choice = menu_funcionarios();
     }
+
 }

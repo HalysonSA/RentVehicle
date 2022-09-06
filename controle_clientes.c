@@ -1,8 +1,10 @@
-
+#include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 
-int controle_clientes()
+char menu_clientes()
 {
+
     printf("==========================================\n");
     printf("======     CONTROLE DE CLIENTES     ======\n");
     printf("======    1 - Cadastrar cliente     ======\n");
@@ -12,39 +14,42 @@ int controle_clientes()
     printf("======    0 - Voltar ao menu        ======\n");
     printf("==========================================\n");
 
-    int choice;
+    char choice;
     printf("Digite a opcao desejada: ");
-    scanf("%d", &choice);
+    scanf("%c", &choice);
+    getchar();
 
-    while (choice != 0)
+    return choice;
+}
+
+void controle_clientes()
+{
+    char choice = menu_clientes();
+
+    while (isdigit(choice) && choice != '0')
     {
-
-        if (choice == 1)
+        switch (choice)
         {
-            // cadastrar_cliente();
+        case '1':
             printf("Cadastrar cliente\n");
-            char nome_cliente[50];
-            char cpf_cliente[50];
-        }
-        else if (choice == 2)
-        {
-            // relatorio_clientes();
+            break;
+        case '2':
             printf("Relatorio clientes\n");
-        }
-        else if (choice == 3)
-        {
-            // editar_cliente();
+            break;
+        case '3':
             printf("Editar cliente\n");
-        }
-        else if (choice == 4)
-        {
-            // remover_cliente();
+            break;
+        case '4':
             printf("Remover cliente\n");
-        }
-        else
-        {
+            break;
+        default:
             printf("Opcao invalida\n");
+            break;
         }
-        return choice;
+
+        printf("Pressione enter para continuar...");
+        getchar();
+
+        choice = menu_clientes();
     }
 }
