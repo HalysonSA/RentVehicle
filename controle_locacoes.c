@@ -4,6 +4,38 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+void menu_cadastrar_locacao(){
+    printf("=============================================\n");
+    printf("Digite o valor da locacao  \n");
+    printf("Digite o dia da locacao  \n");
+    printf("Digite o Cliente  \n");
+    printf("Digite o Veiculo  \n");
+    printf("=============================================\n");
+}
+
+void menu_relatorio_locacao(){
+    printf("=============================================\n");
+    printf("Locacoes: \n");
+    printf("Cliente: Veiculo: dia: valor:\n");
+    printf("=============================================\n");
+}
+
+void menu_editar_locacao(){
+    printf("=============================================\n");
+    printf("Digite a locacao:  \n");
+    printf("Digite o novo valor da locacao  \n");
+    printf("Digite o novo dia da locacao  \n");
+    printf("Digite o novo Cliente  \n");
+    printf("Digite o novo Veiculo  \n");
+    printf("=============================================\n");
+}
+
+void menu_remover_locacao(){
+    printf("=============================================\n");
+    printf("Digite a locacao:  \n");
+    printf("=============================================\n");
+}
+
 char menu_locacoes() { 
     printf("==========================================\n");
     printf("======     CONTROLE DE LOCACOES     ======\n");
@@ -26,28 +58,28 @@ void controle_locacoes()
 {   
     char choice = menu_locacoes();
 
-    while(isdigit(choice) && choice != '0')
+    while(choice != '0')
     {
         switch(choice)
         {
             case '1':
-                printf("Cadastrar locacao\n");
+                menu_cadastrar_locacao();
                 break;
             case '2':
-                printf("Relatorio locacoes\n");
+                menu_relatorio_locacao();
                 break;
             case '3':
-                printf("Editar locacao\n");
+                menu_editar_locacao();
                 break;
             case '4':
-                printf("Remover locacao\n");
+                menu_remover_locacao();
                 break;
             default:
                 printf("Opcao invalida\n");
                 break;
         }
 
-        printf("Pressione enter para continuar...");
+        printf("Pressione enter para continuar...\n");
         getchar();
 
         choice = menu_locacoes();

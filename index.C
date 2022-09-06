@@ -11,7 +11,6 @@
 #include <ctype.h>
 #include "menu_principal.h"
 #include "controle_clientes.h"
-#include "controle_funcionarios.h"
 #include "controle_veiculos.h"
 #include "controle_locacoes.h"
 #include "controle_financeiro.h"
@@ -22,7 +21,7 @@ int main()
 
     system("cls");
 
-    while (isdigit(choice) && choice != '0')
+    while (choice != '0')
     {
         if (choice == '1')
         {
@@ -36,15 +35,10 @@ int main()
 
         else if (choice == '3')
         {
-            controle_funcionarios();
-        }
-
-        else if (choice == '4')
-        {
             controle_veiculos();
         }
 
-        else if (choice == '5')
+        else if (choice == '4')
         {
             controle_financeiro();
         }
@@ -52,7 +46,7 @@ int main()
         else
         {
             printf("\nEscolha Invalida!\n");
-            printf("Pressione qualquer tecla para continuar...");
+            printf("Pressione enter para continuar... \n");
             getchar();
         }
 

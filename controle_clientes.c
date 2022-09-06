@@ -2,6 +2,49 @@
 #include <stdio.h>
 #include <ctype.h>
 
+void menu_cadastro_cliente()
+{
+    printf("=============================================\n");
+    printf(" Digite o nome: \n");
+    printf(" Digite o CPF: \n");
+    printf(" Digite o endereco: \n");
+    printf(" Digite o telefone: \n");
+    printf("=============================================\n");
+}
+
+void menu_relatorio_cliente()
+{
+    printf("=============================================\n");
+    printf(" Relatorio de clientes cadastrados: \n");
+    printf("Nome: Joao da Silva\n");
+    printf("CPF: 123.456.789-00\n");
+    printf("Endereco: Rua das Flores, 123\n");
+    printf("Telefone: (11) 1234-5678\n");
+    printf("Nome: Maria da Silva\n");
+    printf("CPF: 987.654.321-00\n");
+    printf("Endereco: Rua das Flores, 123\n");
+    printf("Telefone: (11) 1234-5678\n");
+    printf("=============================================\n");
+}
+
+void menu_editar_cliente()
+{
+    printf("=============================================\n");
+    printf(" Digite o nome: \n");
+    printf(" Digite o CPF: \n");
+    printf(" Digite o endereco: \n");
+    printf(" Digite o telefone: \n");
+    printf("=============================================\n");
+}
+
+void menu_remover_cliente()
+{
+    printf("=============================================\n");
+    printf(" Digite o CPF do cliente: \n");
+    printf("=============================================\n");
+}
+
+
 char menu_clientes()
 {
 
@@ -26,28 +69,28 @@ void controle_clientes()
 {
     char choice = menu_clientes();
 
-    while (isdigit(choice) && choice != '0')
+    while (choice != '0')
     {
         switch (choice)
         {
         case '1':
-            printf("Cadastrar cliente\n");
+            menu_cadastro_cliente();
             break;
         case '2':
-            printf("Relatorio clientes\n");
+            menu_relatorio_cliente();
             break;
         case '3':
-            printf("Editar cliente\n");
+            menu_editar_cliente();
             break;
         case '4':
-            printf("Remover cliente\n");
+            menu_remover_cliente();
             break;
         default:
             printf("Opcao invalida\n");
             break;
         }
 
-        printf("Pressione enter para continuar...");
+        printf("Pressione enter para continuar...\n");
         getchar();
 
         choice = menu_clientes();
