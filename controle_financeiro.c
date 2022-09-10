@@ -3,9 +3,10 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-void menu_cadastrar_despesa(){
-    char saida[15]
-    
+void menu_cadastrar_despesa()
+{
+    char saida[15];
+
     printf("=============================================\n");
     printf(" Digite o valor da Saida:  \n");
     scanf("%s", saida);
@@ -14,8 +15,9 @@ void menu_cadastrar_despesa(){
     printf(" Saida realizada com sucesso! \n");
 }
 
-void menu_cadastrar_receita(){
-    char entrada[15]
+void menu_cadastrar_receita()
+{
+    char entrada[15];
 
     printf("=============================================\n");
     printf(" Digite o valor da Entrada:  \n");
@@ -25,7 +27,8 @@ void menu_cadastrar_receita(){
     printf(" Entrada realizada com sucesso! \n");
 }
 
-void menu_relatorio(){
+void menu_relatorio()
+{
     // Apenas um exemplo de como seria o relatorio
     printf("=============================================\n");
     printf("====  Relatorio de entrada e saida  ====\n");

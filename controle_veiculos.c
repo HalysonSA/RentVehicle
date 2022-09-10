@@ -3,7 +3,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-void menu_cadastrar_veiculo(){
+void menu_cadastrar_veiculo()
+{
     char modelo[50], marca[50], ano[10], placa[7], valor[50];
 
     printf("=============================================\n");
@@ -26,7 +27,8 @@ void menu_cadastrar_veiculo(){
     printf(" Cadastro realizado com sucesso! \n");
 }
 
-void menu_relatorio_veiculo(){
+void menu_relatorio_veiculo()
+{
     // Apenas um exemplo de como seria o relatorio
     printf("=============================================\n");
     printf("====  Relatorio de vaiculos cadastrados  ====\n");
@@ -37,7 +39,7 @@ void menu_relatorio_veiculo(){
     printf("Placa: MYQ7786\n");
     printf("Valor: RS 100\n");
     printf("=============================================\n");
-    printf("Modelo: Brasília\n");
+    printf("Modelo: Brasilia\n");
     printf("Marca: Volkswagen\n");
     printf("Ano: 1982\n");
     printf("Placa: HPG6912\n");
@@ -45,9 +47,10 @@ void menu_relatorio_veiculo(){
     printf("=============================================\n");
 }
 
-void menu_editar_veiculo(char *veiculo){
+void menu_editar_veiculo(char *veiculo)
+{
     char modelo[50], marca[50], ano[10], placa[7], valor[50];
-    
+
     printf("=============================================\n");
     printf("Digite o modelo do veiculo:  \n");
     scanf("%s", modelo);
@@ -68,8 +71,9 @@ void menu_editar_veiculo(char *veiculo){
     printf(" Cadastro editado com sucesso! \n");
 }
 
-void menu_remover_veiculo(){
-    char placa[7]
+void menu_remover_veiculo()
+{
+    char placa[7];
     printf("=============================================\n");
     printf("Digite a placa do veiculo:  \n");
     scanf("%s", placa);
@@ -78,7 +82,8 @@ void menu_remover_veiculo(){
     printf(" Veiculo removido com sucesso! \n");
 }
 
-char menu_veiculos(){
+char menu_veiculos()
+{
     printf("=============================================\n");
     printf("======     CONTROLE DE VEICULOS      ========\n");
     printf("======    1 - Cadastrar veiculo       ========\n");
@@ -101,31 +106,37 @@ void controle_veiculos()
 
     char choice = menu_veiculos();
 
-    while( choice != '0')
+    while (choice != '0')
     {
-        switch(choice)
+        switch (choice)
         {
-            case '1':
-                menu_cadastrar_veiculo();
-                break;
-            case '2':
-                menu_relatorio_veiculo();
-                break;
-            case '3':
-                menu_editar_veiculo();
-                break;
-            case '4':
-                menu_remover_veiculo();
-                break;
-            default:
-                printf("Opcao invalida\n");
-                break;
+        case '1':
+            menu_cadastrar_veiculo();
+            break;
+        case '2':
+            menu_relatorio_veiculo();
+            break;
+        case '3':
+        {
+            char veiculo[7];
+
+            printf("Digite a placa do veiculo:  \n");
+            scanf("%s", veiculo);
+            getchar();
+            menu_editar_veiculo(veiculo);
+        }
+        break;
+        case '4':
+            menu_remover_veiculo();
+            break;
+        default:
+            printf("Opcao invalida\n");
+            break;
         }
 
         printf("Pressione enter para continuar...\n");
         getchar();
 
         choice = menu_veiculos();
-        
     }
 }
