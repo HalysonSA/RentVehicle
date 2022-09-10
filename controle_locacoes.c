@@ -5,35 +5,71 @@
 #include <stdlib.h>
 
 void menu_cadastrar_locacao(){
+    char valor[15], data[10], cliente[50], veiculo[50];
+
     printf("=============================================\n");
     printf("Digite o valor da locacao  \n");
+    scanf("%s", valor);
+    getchar();
     printf("Digite o dia da locacao  \n");
+    scanf("%s", data);
+    getchar();
     printf("Digite o Cliente  \n");
+    scanf("%s", cliente);
+    getchar();
     printf("Digite o Veiculo  \n");
+    scanf("%s", veiculo);
+    getchar();
     printf("=============================================\n");
+    printf(" Cadastro realizado com sucesso! \n");
 }
 
 void menu_relatorio_locacao(){
+    // Apenas um exemplo de como seria o relatorio
     printf("=============================================\n");
-    printf("Locacoes: \n");
-    printf("Cliente: Veiculo: dia: valor:\n");
+    printf("====  Relatorio de clientes cadastrados  ====\n");
+    printf("=============================================\n");
+    printf("Cliente: Joao da Silva\n");
+    printf("Veiculo: Fiat Uno Mille\n");
+    printf("dia: 10/09/2022\n");
+    printf("valor: RS 100\n");
+    printf("=============================================\n");
+    printf("Cliente: Maria da Silva\n");
+    printf("Veiculo: Volkswagen Brasília\n");
+    printf("dia: 10/09/2022\n");
+    printf("valor: RS 100\n");
     printf("=============================================\n");
 }
 
-void menu_editar_locacao(){
+void menu_editar_locacao(char *locacao){
+    char valor[15], data[10], cliente[50], veiculo[50];
+
     printf("=============================================\n");
-    printf("Digite a locacao:  \n");
-    printf("Digite o novo valor da locacao  \n");
-    printf("Digite o novo dia da locacao  \n");
-    printf("Digite o novo Cliente  \n");
-    printf("Digite o novo Veiculo  \n");
+    printf("Digite o novo valor da locacao:  \n");
+    scanf("%s", valor);
+    getchar();
+    printf("Digite o novo dia da locacao:  \n");
+    scanf("%s", data);
+    getchar();
+    printf("Digite o novo Cliente:  \n");
+    scanf("%s", cliente);
+    getchar();
+    printf("Digite o novo Veiculo:  \n");
+    scanf("%s", veiculo);
+    getchar();
     printf("=============================================\n");
+    printf(" Cadastro editado com sucesso! \n");
 }
 
 void menu_remover_locacao(){
+    char cliente[50];
+
     printf("=============================================\n");
-    printf("Digite a locacao:  \n");
+    printf("Digite o cliente da locacao:  \n");
+    scanf("%s", cliente);
+    getchar();
     printf("=============================================\n");
+    printf(" Locacao removida com sucesso! \n");
 }
 
 char menu_locacoes() { 
