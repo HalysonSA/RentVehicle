@@ -19,7 +19,7 @@ int main()
 {
     char choice = menu_principal();
 
-    system("cls");
+    system("cls||clear");
 
     while (choice != '0')
     {
