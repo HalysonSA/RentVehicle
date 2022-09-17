@@ -9,16 +9,16 @@ void menu_cadastrar_locacao()
     char valor[15], data[10], cliente[50], veiculo[50];
 
     printf("=============================================\n");
-    printf("Digite o valor da locacao  \n");
+    printf("Digite o valor da locacao:  \n");
     scanf("%s", valor);
     getchar();
-    printf("Digite o dia da locacao  \n");
+    printf("Digite o data da locacao(dd/mm/aaaa):  \n");
     scanf("%s", data);
     getchar();
-    printf("Digite o Cliente  \n");
+    printf("Digite o Cliente:  \n");
     scanf("%s", cliente);
     getchar();
-    printf("Digite o Veiculo  \n");
+    printf("Digite o Veiculo:  \n");
     scanf("%s", veiculo);
     getchar();
     printf("=============================================\n");
@@ -51,7 +51,7 @@ void menu_editar_locacao(char *locacao)
     printf("Digite o valor da locacao:  \n");
     scanf("%s", valor);
     getchar();
-    printf("Digite o dia da locacao:  \n");
+    printf("Digite a data da locacao:  \n");
     scanf("%s", data);
     getchar();
     printf("Digite a placa do Veiculo:  \n");
