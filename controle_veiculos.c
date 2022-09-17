@@ -137,6 +137,8 @@ void controle_veiculos()
         printf("Pressione enter para continuar...\n");
         getchar();
 
+        system("cls||clear");
+
         choice = menu_veiculos();
     }
 }

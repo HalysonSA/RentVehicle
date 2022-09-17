@@ -130,6 +130,8 @@ void controle_clientes()
         printf("Pressione enter para continuar...\n");
         getchar();
 
+        system("cls||clear");
+
         choice = menu_clientes();
     }
 }

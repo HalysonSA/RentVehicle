@@ -94,6 +94,7 @@ char menu_locacoes()
 
 void controle_locacoes()
 {
+
     char choice = menu_locacoes();
 
     while (choice != '0')
@@ -127,6 +128,8 @@ void controle_locacoes()
 
         printf("Pressione enter para continuar...\n");
         getchar();
+
+        system("cls||clear");
 
         choice = menu_locacoes();
     }
