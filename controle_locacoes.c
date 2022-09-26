@@ -51,7 +51,7 @@ void menu_editar_locacao(char *locacao)
     printf("Digite o valor da locacao:  \n");
     scanf("%s", valor);
     getchar();
-    printf("Digite a data da locacao:  \n");
+    printf("Digite o data da locacao(dd/mm/aaaa):  \n");
     scanf("%s", data);
     getchar();
     printf("Digite a placa do Veiculo:  \n");
@@ -63,11 +63,11 @@ void menu_editar_locacao(char *locacao)
 
 void menu_remover_locacao()
 {
-    char cliente[50];
+    char cpf[15];
 
     printf("=============================================\n");
     printf("Digite o CPF do cliente:  \n");
-    scanf("%s", cliente);
+    scanf("%s", cpf);
     getchar();
     printf("=============================================\n");
     printf(" Locacao removida com sucesso! \n");

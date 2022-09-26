@@ -1,6 +1,6 @@
-char menu_locacoes();
-void controle_locacoes();
-void menu_cadastrar_locacao();
-void menu_editar_locacao();
-void menu_remover_locacao();
-void menu_relatorio_locacao();
+char menu_locacoes(char);
+void controle_locacoes(void);
+void menu_cadastrar_locacao(void);
+void menu_editar_locacao(void);
+void menu_remover_locacao(void);
+void menu_relatorio_locacao(void);
