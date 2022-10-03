@@ -5,7 +5,7 @@
 
 void menu_cadastrar_veiculo()
 {
-    char modelo[50], marca[50], ano[10], placa[7], valor[50];
+    char modelo[30], marca[30], ano[10], placa[7], valor[50], cor[20];
 
     printf("=============================================\n");
     printf("Digite o modelo do veiculo:  \n");
@@ -14,7 +14,7 @@ void menu_cadastrar_veiculo()
     printf("Digite a marca do veiculo:  \n");
     scanf("%s", marca);
     getchar();
-    printf("Digite o ano do veiculo:  \n");
+    printf("Digite o ano do veiculo (dd/mm/aaaa):  \n");
     scanf("%s", ano);
     getchar();
     printf("Digite a placa do veiculo:  \n");
@@ -22,6 +22,9 @@ void menu_cadastrar_veiculo()
     getchar();
     printf("Digite o valor do veiculo:  \n");
     scanf("%s", valor);
+    getchar();
+    printf("Digite a cor do veiculo:  \n");
+    scanf("%s", cor);
     getchar();
     printf("=============================================\n");
     printf(" Cadastro realizado com sucesso! \n");
@@ -49,7 +52,7 @@ void menu_relatorio_veiculo()
 
 void menu_editar_veiculo(char *veiculo)
 {
-    char modelo[50], marca[50], ano[10], placa[7], valor[50];
+    char modelo[30], marca[30], ano[10], valor[50], cor[20];
 
     printf("=============================================\n");
     printf("Digite o modelo do veiculo:  \n");
@@ -61,14 +64,14 @@ void menu_editar_veiculo(char *veiculo)
     printf("Digite o ano do veiculo:  \n");
     scanf("%s", ano);
     getchar();
-    printf("Digite a placa do veiculo:  \n");
-    scanf("%s", placa);
-    getchar();
     printf("Digite o valor do veiculo:  \n");
     scanf("%s", valor);
     getchar();
+    printf("Digite a cor do veiculo:  \n");
+    scanf("%s", cor);
+    getchar();
     printf("=============================================\n");
-    printf(" Cadastro editado com sucesso! \n");
+    printf(" Cadastro atualizado com sucesso! \n");
 }
 
 void menu_remover_veiculo()

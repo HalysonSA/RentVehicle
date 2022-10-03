@@ -5,26 +5,32 @@
 
 void menu_cadastrar_despesa()
 {
-    char saida[15];
+    char despesa[15];
+    char descricao[50];
 
     printf("=============================================\n");
-    printf(" Digite o valor da Saida:  \n");
-    scanf("%s", saida);
+    printf(" Digite a descricao da despesa:  \n");
+    scanf("%s", descricao);
+    printf(" Digite o valor da despesa:  \n");
+    scanf("%s", despesa);
     getchar();
     printf("=============================================\n");
-    printf(" Saida realizada com sucesso! \n");
+    printf(" Despesa cadastrada com sucesso! \n");
 }
 
 void menu_cadastrar_receita()
 {
-    char entrada[15];
+    char receita[15];
+    char descricao[50];
 
     printf("=============================================\n");
-    printf(" Digite o valor da Entrada:  \n");
-    scanf("%s", entrada);
+    printf(" Digite a descricao da receita:  \n");
+    scanf("%s", descricao);
+    printf(" Digite o valor da receita:  \n");
+    scanf("%s", receita);
     getchar();
     printf("=============================================\n");
-    printf(" Entrada realizada com sucesso! \n");
+    printf(" Receita cadastrada com sucesso! \n");
 }
 
 void menu_relatorio()

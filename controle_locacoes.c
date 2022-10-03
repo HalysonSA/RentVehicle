@@ -6,19 +6,19 @@
 
 void menu_cadastrar_locacao()
 {
-    char valor[15], data[10], cliente[50], veiculo[50];
+    char valor[15], data[10], cliente[11], veiculo[7];
 
     printf("=============================================\n");
     printf("Digite o valor da locacao:  \n");
     scanf("%s", valor);
     getchar();
-    printf("Digite o data da locacao(dd/mm/aaaa):  \n");
+    printf("Digite a data da locacao(dd/mm/aaaa):  \n");
     scanf("%s", data);
-    getchar();
-    printf("Digite o Cliente:  \n");
+    getchar(); // Ou pegar a data do sistema
+    printf("Digite o CPF do cliente:  \n");
     scanf("%s", cliente);
     getchar();
-    printf("Digite o Veiculo:  \n");
+    printf("Digite a placa do veiculo:  \n");
     scanf("%s", veiculo);
     getchar();
     printf("=============================================\n");
@@ -45,13 +45,13 @@ void menu_relatorio_locacao()
 
 void menu_editar_locacao(char *locacao)
 {
-    char valor[15], data[10], veiculo[50];
+    char valor[15], data[10], veiculo[7];
 
     printf("=============================================\n");
     printf("Digite o valor da locacao:  \n");
     scanf("%s", valor);
     getchar();
-    printf("Digite o data da locacao(dd/mm/aaaa):  \n");
+    printf("Digite a data da locacao(dd/mm/aaaa):  \n");
     scanf("%s", data);
     getchar();
     printf("Digite a placa do Veiculo:  \n");
@@ -63,7 +63,7 @@ void menu_editar_locacao(char *locacao)
 
 void menu_remover_locacao()
 {
-    char cpf[15];
+    char cpf[11];
 
     printf("=============================================\n");
     printf("Digite o CPF do cliente:  \n");
@@ -109,12 +109,12 @@ void controle_locacoes()
             break;
         case '3':
         {
-            char locacao[15];
+            char cpf[11];
 
             printf("Digite o CPF do cliente:  \n");
-            scanf("%s", locacao);
+            scanf("%s", cpf);
             getchar();
-            menu_editar_locacao(locacao);
+            menu_editar_locacao(cpf);
         }
 
         break;

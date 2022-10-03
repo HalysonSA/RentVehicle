@@ -43,14 +43,11 @@ void menu_relatorio_cliente()
 
 void menu_editar_cliente(char *cliente)
 {
-    char nome[50], cpf[15], endereco[50], telefone[15];
+    char nome[50], endereco[50], telefone[15];
 
     printf("=============================================\n");
     printf(" Digite o nome: \n");
     scanf("%s", nome);
-    getchar();
-    printf(" Digite o CPF: \n");
-    scanf("%s", cpf);
     getchar();
     printf(" Digite o endereco: \n");
     scanf("%s", endereco);
@@ -59,7 +56,7 @@ void menu_editar_cliente(char *cliente)
     scanf("%s", telefone);
     getchar();
     printf("=============================================\n");
-    printf(" Cadastro editado com sucesso! \n");
+    printf(" Cadastro atualizado com sucesso! \n");
 }
 
 void menu_remover_cliente()
