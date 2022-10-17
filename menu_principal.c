@@ -6,6 +6,8 @@
 char menu_principal()
 {
 
+    system("cls||clear");
+
     printf("=============== MENU PRINCIPAL ===============\n");
     printf("======    1 - Controle de locacoes      ======\n");
     printf("======    2 - Controle de clientes      ======\n");

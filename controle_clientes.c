@@ -34,12 +34,12 @@ void menu_relatorio_cliente()
 
 void menu_editar_cliente(char *cliente)
 {
-    char nome[50], cpf[15], endereco[50], telefone[15];
+    char nome[50], endereco[50], telefone[15];
 
     printf("=============================================\n");
     inputClientValues(nome,cpf,endereco,telefone);
     printf("=============================================\n");
-    printf(" Cadastro editado com sucesso! \n");
+    printf(" Cadastro atualizado com sucesso! \n");
 }
 
 void menu_remover_cliente()
