@@ -12,6 +12,7 @@ void menu_cadastrar_locacao()
     printf("Digite o valor da locacao:  \n");
     scanf("%s", valor);
     getchar();
+    //Aplicar o mesmo modelo do cpf
     printf("Digite o data da locacao(dd/mm/aaaa):  \n");
     scanf("%s", data);
     getchar();

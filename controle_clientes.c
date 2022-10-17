@@ -1,24 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include "element_validation.h"
+#include "element_input.h"
 
 void menu_cadastro_cliente()
 {
     char nome[50], cpf[15], endereco[50], telefone[15];
 
     printf("=============================================\n");
-    printf(" Digite o nome: \n");
-    scanf("%s", nome);
-    getchar();
-    printf(" Digite o CPF: \n");
-    scanf("%s", cpf);
-    getchar();
-    printf(" Digite o endereco: \n");
-    scanf("%s", endereco);
-    getchar();
-    printf(" Digite o telefone: \n");
-    scanf("%s", telefone);
-    getchar();
+    inputClientValues(nome,cpf,endereco,telefone);
     printf("=============================================\n");
     printf(" Cadastro realizado com sucesso! \n");
 }
@@ -46,18 +37,7 @@ void menu_editar_cliente(char *cliente)
     char nome[50], cpf[15], endereco[50], telefone[15];
 
     printf("=============================================\n");
-    printf(" Digite o nome: \n");
-    scanf("%s", nome);
-    getchar();
-    printf(" Digite o CPF: \n");
-    scanf("%s", cpf);
-    getchar();
-    printf(" Digite o endereco: \n");
-    scanf("%s", endereco);
-    getchar();
-    printf(" Digite o telefone: \n");
-    scanf("%s", telefone);
-    getchar();
+    inputClientValues(nome,cpf,endereco,telefone);
     printf("=============================================\n");
     printf(" Cadastro editado com sucesso! \n");
 }
