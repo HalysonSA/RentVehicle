@@ -34,7 +34,7 @@ void menu_relatorio_cliente()
 
 void menu_editar_cliente(char *cliente)
 {
-    char nome[50], endereco[50], telefone[15];
+    char nome[50], cpf[11], endereco[50], telefone[15];
 
     printf("=============================================\n");
     inputClientValues(nome,cpf,endereco,telefone);

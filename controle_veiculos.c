@@ -8,7 +8,7 @@
 
 void menu_cadastrar_veiculo()
 {
-    char modelo[30], marca[30], ano[10], placa[7], valor[50], cor[20];
+    char modelo[30], marca[30], ano[10], placa[7], valor[50];
 
     printf("=============================================\n");
     inputVehicleValues(modelo,marca,ano,placa,valor);
