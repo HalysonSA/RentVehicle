@@ -1,44 +1,66 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 #include "element_validation.h"
 #include "element_input.h"
+#include "controle_clientes.h"
+
+Cliente *cliente;
 
 void menu_cadastro_cliente()
 {
+
+    cliente = (Cliente *)malloc(10 * sizeof(Cliente));
+
     char nome[50], cpf[15], endereco[50], telefone[15];
 
     printf("=============================================\n");
-    inputClientValues(nome,cpf,endereco,telefone);
+    inputClientValues(nome, cpf, endereco, telefone);
     printf("=============================================\n");
+    strcpy(cliente->nome, nome);
+    strcpy(cliente->cpf, cpf);
+    strcpy(cliente->endereco, endereco);
+    strcpy(cliente->telefone, telefone);
+
     printf(" Cadastro realizado com sucesso! \n");
 }
 
 void menu_relatorio_cliente()
 {
-    // Apenas um exemplo de como seria o relatorio
+
     printf("=============================================\n");
     printf("====  Relatorio de clientes cadastrados  ====\n");
     printf("=============================================\n");
-    printf("Nome: Joao da Silva\n");
-    printf("CPF: 123.456.789-00\n");
-    printf("Endereco: Rua das Flores, 123\n");
-    printf("Telefone: (11) 1234-5678\n");
-    printf("=============================================\n");
-    printf("Nome: Maria da Silva\n");
-    printf("CPF: 987.654.321-00\n");
-    printf("Endereco: Rua das Flores, 123\n");
-    printf("Telefone: (11) 1234-5678\n");
+    if (cliente[0].nome != NULL)
+    {
+        printf("Nome do cliente: %s \n", cliente->nome);
+        printf("CPF do cliente: %s \n", cliente->cpf);
+        printf("Endereco do cliente: %s \n", cliente->endereco);
+        printf("Telefone do cliente: %s \n", cliente->telefone);
+    }
+    else
+    {
+        printf("Nenhum cliente cadastrado! \n");
+    }
     printf("=============================================\n");
 }
 
-void menu_editar_cliente(char *cliente)
+void menu_editar_cliente(char *cpfCliente)
 {
+
     char nome[50], cpf[11], endereco[50], telefone[15];
 
     printf("=============================================\n");
-    inputClientValues(nome,cpf,endereco,telefone);
+    inputClientValues(nome, cpf, endereco, telefone);
     printf("=============================================\n");
+    /*
+        strcpy(cliente->nome, nome);
+        strcpy(cliente->cpf, cpf);
+        strcpy(cliente->endereco, endereco);
+        strcpy(cliente->telefone, telefone);
+    */
+
     printf(" Cadastro atualizado com sucesso! \n");
 }
 
@@ -54,7 +76,7 @@ void menu_remover_cliente()
     printf(" Cliente removido com sucesso! \n");
 }
 
-char menu_clientes()
+char menu_clientes(void)
 {
 
     printf("==========================================\n");
