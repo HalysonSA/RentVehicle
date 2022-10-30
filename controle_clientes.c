@@ -105,13 +105,19 @@ void controle_clientes()
         switch (choice)
         {
         case '1':
+
+            system("cls||clear");
             menu_cadastro_cliente();
             break;
         case '2':
+
+            system("cls||clear");
             menu_relatorio_cliente();
             break;
         case '3':
         {
+
+            system("cls||clear");
             char cpf[15];
 
             printf("=============================================\n");
@@ -122,6 +128,8 @@ void controle_clientes()
         }
         break;
         case '4':
+
+            system("cls||clear");
             menu_remover_cliente();
             break;
         default:

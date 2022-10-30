@@ -53,7 +53,7 @@ int onlyTextInput(char *text)
     }
 }
 
-void inputVehicleValues(char *modelo, char *marca, char *ano, char *placa, char *valor)
+void inputVehicleValues(char *modelo, char *marca, char *ano, char *placa, char *valor, char *cor)
 {
     do
     {
@@ -88,6 +88,13 @@ void inputVehicleValues(char *modelo, char *marca, char *ano, char *placa, char 
         printf("Digite o valor do veiculo:  \n");
         scanf("%s", valor);
     } while (onlyNumberInput(valor) == False2);
+    getchar();
+
+    do
+    {
+        printf("Digite a cor do veiculo:  \n");
+        scanf("%s", cor);
+    } while (onlyTextInput(cor) == False2);
     getchar();
 
     return;
