@@ -130,3 +130,34 @@ void inputClientValues(char *nome, char *cpf, char *endereco, char *telefone)
     } while (onlyNumberInput(telefone) == False2);
     getchar();
 }
+
+void inputRentalValues(char *valor, char *data, char *cliente, char *placa)
+{
+    do
+    {
+        printf("Digite o valor da locacao:  \n");
+        scanf("%s", valor);
+    } while (onlyNumberInput(valor) == False2);
+    getchar();
+
+    do
+    {
+        printf("Digite a data da locacao(dd/mm/aaaa):  \n");
+        scanf("%s", data);
+    } while (onlyNumberAndTextInput(data) == False2);
+    getchar(); // Ou pegar a data do sistema // Aplicar o mesmo modelo do cpf
+
+    do
+    {
+        printf("Digite o CPF do cliente:  \n");
+        scanf("%s", cliente);
+    } while (CPFValidation(cliente) == False2);
+    getchar();
+
+    do
+    {
+        printf("Digite a placa do veiculo:  \n");
+        scanf("%s", placa);
+    } while (carPlateValidation(placa) == False2);
+    getchar();
+}

@@ -37,6 +37,23 @@ int CPFValidation(char cpf[11]){
     }
 }
 
+/*int DateValidation(char data[10]){
+    int i, firstDigit, secondDigit;
+    int checkFirstDigit = 0;
+    for(i = 0; i < 9;i++){
+        if (i == 3 || i == 6)
+        {
+            checkFirstDigit += (cpf[i]-'0');
+        }else{
+            system("cls||clear");
+            printf("Data Inválida \n");
+            return False1;
+        }
+    }
+    system("cls||clear");
+    return True1;
+}*/
+
 int carPlateValidation(char plate[7]){
     
     char plateLetters[4] = {plate[0],plate[1],plate[2],plate[4]};

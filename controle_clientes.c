@@ -13,7 +13,7 @@ void menu_cadastro_cliente()
 
     cliente = (Cliente *)malloc(10 * sizeof(Cliente));
 
-    char nome[50], cpf[15], endereco[50], telefone[15];
+    char nome[50], cpf[11], endereco[50], telefone[15];
 
     printf("=============================================\n");
     inputClientValues(nome, cpf, endereco, telefone);
@@ -66,7 +66,7 @@ void menu_editar_cliente(char *cpfCliente)
 
 void menu_remover_cliente()
 {
-    char cpf[15];
+    char cpf[11];
 
     printf("=============================================\n");
     printf(" Digite o CPF do cliente: \n");
@@ -118,7 +118,7 @@ void controle_clientes()
         {
 
             system("cls||clear");
-            char cpf[15];
+            char cpf[11];
 
             printf("=============================================\n");
             printf("Qual o CPF do cliente que deseja editar? \n");
