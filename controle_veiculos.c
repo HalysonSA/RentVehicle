@@ -5,7 +5,7 @@
 #include <string.h>
 #include "element_validation.h"
 #include "element_input.h"
-#include "controle_veiculos.h"
+#include "manipula_arquivo.h"
 
 Veiculo *veiculo;
 
@@ -14,55 +14,39 @@ void menu_cadastrar_veiculo()
 
     veiculo = (Veiculo *)malloc(10 * sizeof(Veiculo));
 
-    char modelo[30], marca[30], ano[10], placa[8], valor[50], cor[20];
-
     printf("=============================================\n");
-    inputVehicleValues(modelo, marca, ano, placa, valor, cor);
+    veiculo = inputVehicleValues();
+    gravaArquivoVeiculo(veiculo);
     printf("=============================================\n");
-    strcpy(veiculo->modelo, modelo);
-    strcpy(veiculo->marca, marca);
-    strcpy(veiculo->ano, ano);
-    strcpy(veiculo->placa, placa);
-    strcpy(veiculo->valor, valor);
-    strcpy(veiculo->cor, cor);
-
     printf(" Cadastro realizado com sucesso! \n");
     printf("=============================================\n");
-    printf("Pressione enter para continuar...\n");
-    getchar();
 }
 
-void menu_relatorio_veiculo()
+void menu_relatorio_veiculo(Veiculo *veiculo)
 {
-    // Apenas um exemplo de como seria o relatorio
-    printf("=============================================\n");
-    printf("====  Relatorio de vaiculos cadastrados  ====\n");
-    printf("=============================================\n");
-    if (veiculo->modelo != NULL)
+    if (veiculo[0].marca != NULL)
     {
-
-        printf("Modelo: %s \n", veiculo->modelo);
-        printf("Marca: %s \n", veiculo->marca);
-        printf("Ano: %s \n", veiculo->ano);
-        printf("Placa: %s \n", veiculo->placa);
-        printf("Valor: %s \n", veiculo->valor);
-        printf("Cor: %s \n", veiculo->cor);
+        printf("Marca do veiculo: %s \n", veiculo->marca);
+        printf("Modelo do veiculo: %s \n", veiculo->modelo);
+        printf("Ano do veiculo: %s \n", veiculo->ano);
+        printf("Placa do veiculo: %s \n", veiculo->placa);
+        printf("Cor do veiculo: %s \n", veiculo->cor);
+        printf("Valor do veiculo: %s \n", veiculo->valor);
     }
     else
     {
-        printf("Nenhum veiculo cadastrado! \n");
+        printf("Nenhum Veiculo cadastrado! \n");
     }
     printf("=============================================\n");
 }
 
 void menu_editar_veiculo(char *veiculo)
 {
-    char modelo[50], marca[50], ano[10], placa[7], valor[50], cor[20];
 
     printf("=============================================\n");
-    inputVehicleValues(modelo, marca, ano, placa, valor, cor);
-    getchar();
+    printf("Em Desenvolvimento... \n");
     printf("=============================================\n");
+    getchar();
     printf(" Cadastro atualizado com sucesso! \n");
 }
 
@@ -111,9 +95,12 @@ void controle_veiculos()
             menu_cadastrar_veiculo();
             break;
         case '2':
-
             system("cls||clear");
-            menu_relatorio_veiculo();
+            printf("=============================================\n");
+            printf("====  Relatorio de veiculos cadastrados  ====\n");
+            printf("=============================================\n");
+
+            listaVeiculos();
             break;
         case '3':
         {

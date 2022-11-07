@@ -2,20 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "controle_clientes.h"
-
-void gravaCliente(Cliente *cliente)
-{
-    FILE *fp;
-    fp = fopen("clientes.dat", "ab");
-    if (fp == NULL)
-    {
-        printf("Ocorreu um erro na abertura do arquivo!\n");
-        getchar();
-        exit(1);
-    }
-    fwrite(cliente, sizeof(Cliente), 1, fp);
-    fclose(fp);
-}
+#include "controle_veiculos.h"
 
 Cliente *buscaCliente(void)
 {
@@ -68,4 +55,55 @@ void listaClientes(void)
     }
     fclose(fp);
     free(cliente);
+}
+
+void listaVeiculos(void)
+{
+    FILE *fp;
+    Veiculo *veiculo;
+
+    veiculo = (Veiculo *)malloc(sizeof(Veiculo));
+
+    fp = fopen("veiculos.dat", "rb");
+
+    if (fp == NULL)
+    {
+        printf("Ocorreu um erro na abertura do arquivo!\n");
+        exit(1);
+    }
+
+    while (fread(veiculo, sizeof(Veiculo), 1, fp))
+    {
+        menu_relatorio_veiculo(veiculo);
+    }
+    fclose(fp);
+    free(veiculo);
+}
+
+void gravaArquivoCliente(Cliente *cliente)
+{
+    FILE *fp;
+    fp = fopen("clientes.dat", "ab");
+    if (fp == NULL)
+    {
+        printf("Ocorreu um erro na abertura do arquivo!\n");
+        getchar();
+        exit(1);
+    }
+    fwrite(cliente, sizeof(Cliente), 1, fp);
+    fclose(fp);
+}
+
+void gravaArquivoVeiculo(Veiculo *veiculo)
+{
+    FILE *fp;
+    fp = fopen("veiculos.dat", "ab");
+    if (fp == NULL)
+    {
+        printf("Ocorreu um erro na abertura do arquivo!\n");
+        getchar();
+        exit(1);
+    }
+    fwrite(veiculo, sizeof(Veiculo), 1, fp);
+    fclose(fp);
 }

@@ -5,6 +5,7 @@
 #include <string.h>
 #include "element_validation.h"
 #include "controle_clientes.h"
+#include "controle_veiculos.h"
 
 const int True2 = 1;
 const int False2 = 0;
@@ -33,8 +34,15 @@ int onlyNumberAndTextInput(char *text)
 
 int onlyNumberInput(char *text)
 {
-    if (strpbrk(text, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c") == NULL)
+    if (strpbrk(text, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\x0b\x0c") == NULL)
     {
+
+        size_t ln = strlen(text) - 1;
+
+        if (text[ln] == '\n')
+        {
+            text[ln] = '\0';
+        }
         system("cls||clear");
         return True2;
     }
@@ -68,51 +76,62 @@ int onlyTextInput(char *text)
     }
 }
 
-void inputVehicleValues(char *modelo, char *marca, char *ano, char *placa, char *valor, char *cor)
+Veiculo *inputVehicleValues(void)
 {
+    Veiculo *veiculo = (Veiculo *)malloc(sizeof(Veiculo));
+
+    char placa[10];
+    char modelo[20];
+    char marca[20];
+    char ano[5];
+    char cor[20];
+    char valor[10];
+
     do
     {
         printf("Digite o modelo do veiculo:  \n");
-        scanf("%s", modelo);
+        fgets(modelo, sizeof modelo, stdin);
     } while (onlyTextInput(modelo) == False2);
-    getchar();
 
     do
     {
         printf("Digite a marca do veiculo:  \n");
-        scanf("%s", marca);
+        fgets(marca, sizeof marca, stdin);
     } while (onlyNumberAndTextInput(marca) == False2);
-    getchar();
 
     do
     {
         printf("Digite o ano do veiculo:  \n");
-        scanf("%s", ano);
+        fgets(ano, sizeof ano, stdin);
     } while (onlyNumberInput(ano) == False2);
-    getchar();
 
     do
     {
         printf("Digite a placa do veiculo:  \n");
         scanf("%s", placa);
+        getchar();
     } while (carPlateValidation(placa) == False2);
-    getchar();
 
     do
     {
         printf("Digite o valor do veiculo:  \n");
-        scanf("%s", valor);
+        fgets(valor, sizeof valor, stdin);
     } while (onlyNumberInput(valor) == False2);
-    getchar();
 
     do
     {
         printf("Digite a cor do veiculo:  \n");
-        scanf("%s", cor);
+        fgets(cor, sizeof cor, stdin);
     } while (onlyTextInput(cor) == False2);
-    getchar();
 
-    return;
+    strcpy(veiculo->modelo, modelo);
+    strcpy(veiculo->marca, marca);
+    strcpy(veiculo->ano, ano);
+    strcpy(veiculo->placa, placa);
+    strcpy(veiculo->valor, valor);
+    strcpy(veiculo->cor, cor);
+
+    return veiculo;
 }
 
 Cliente *inputClientValues(void)
@@ -134,9 +153,8 @@ Cliente *inputClientValues(void)
     do
     {
         printf(" Digite o CPF: \n");
-        scanf("%s", cpf);
+        fgets(cpf, sizeof cpf, stdin);
     } while (CPFValidation(cpf) == False2);
-    getchar();
 
     do
     {
@@ -147,9 +165,8 @@ Cliente *inputClientValues(void)
     do
     {
         printf(" Digite o telefone: \n");
-        scanf("%s", telefone);
+        fgets(telefone, sizeof telefone, stdin);
     } while (onlyNumberInput(telefone) == False2);
-    getchar();
 
     strcpy(cliente->nome, nome);
     strcpy(cliente->cpf, cpf);

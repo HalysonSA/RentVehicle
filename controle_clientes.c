@@ -4,7 +4,7 @@
 #include <string.h>
 #include "element_validation.h"
 #include "element_input.h"
-#include "manipula_arquivo_cliente.h"
+#include "manipula_arquivo.h"
 
 Cliente *cliente;
 
@@ -14,8 +14,8 @@ void menu_cadastro_cliente()
     cliente = (Cliente *)malloc(sizeof(Cliente));
     printf("=============================================\n");
     cliente = inputClientValues();
+    gravaArquivoCliente(cliente);
     printf("=============================================\n");
-    gravaCliente(cliente);
     printf(" Cadastro realizado com sucesso! \n");
 }
 
