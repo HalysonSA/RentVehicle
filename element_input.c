@@ -4,14 +4,22 @@
 #include <stdlib.h>
 #include <string.h>
 #include "element_validation.h"
+#include "controle_clientes.h"
 
 const int True2 = 1;
 const int False2 = 0;
 
 int onlyNumberAndTextInput(char *text)
 {
-    if (strpbrk(text, "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c") == NULL)
+    if (strpbrk(text, "0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\x0b\x0c") == NULL)
     {
+
+        size_t ln = strlen(text) - 1;
+
+        if (text[ln] == '\n')
+        {
+            text[ln] = '\0';
+        }
         system("cls||clear");
         return True2;
     }
@@ -40,8 +48,15 @@ int onlyNumberInput(char *text)
 
 int onlyTextInput(char *text)
 {
-    if (strpbrk(text, "0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c") == NULL)
+    if (strpbrk(text, "0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\x0b\x0c") == NULL)
     {
+
+        size_t ln = strlen(text) - 1;
+
+        if (text[ln] == '\n')
+        {
+            text[ln] = '\0';
+        }
         system("cls||clear");
         return True2;
     }
@@ -100,14 +115,21 @@ void inputVehicleValues(char *modelo, char *marca, char *ano, char *placa, char 
     return;
 }
 
-void inputClientValues(char *nome, char *cpf, char *endereco, char *telefone)
+Cliente *inputClientValues(void)
 {
+    Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
+
+    char nome[50];
+    char cpf[15];
+    char telefone[15];
+    char endereco[50];
+
     do
     {
         printf(" Digite o nome: \n");
-        scanf("%s", nome);
+        fgets(nome, sizeof nome, stdin);
+
     } while (onlyTextInput(nome) == False2);
-    getchar();
 
     do
     {
@@ -119,9 +141,8 @@ void inputClientValues(char *nome, char *cpf, char *endereco, char *telefone)
     do
     {
         printf(" Digite o endereco: \n");
-        scanf("%s", endereco);
+        fgets(endereco, sizeof endereco, stdin);
     } while (onlyNumberAndTextInput(endereco) == False2);
-    getchar();
 
     do
     {
@@ -129,6 +150,13 @@ void inputClientValues(char *nome, char *cpf, char *endereco, char *telefone)
         scanf("%s", telefone);
     } while (onlyNumberInput(telefone) == False2);
     getchar();
+
+    strcpy(cliente->nome, nome);
+    strcpy(cliente->cpf, cpf);
+    strcpy(cliente->endereco, endereco);
+    strcpy(cliente->telefone, telefone);
+
+    return cliente;
 }
 
 void inputRentalValues(char *valor, char *data, char *cliente, char *placa)
