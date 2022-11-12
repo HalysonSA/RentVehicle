@@ -36,18 +36,11 @@ void menu_relatorio_cliente(Cliente *cliente)
     printf("=============================================\n");
 }
 
-void menu_editar_cliente(char *cpfCliente)
+void menu_editar_cliente()
 {
-
     printf("=============================================\n");
-    printf("Em Desenvolvimento... \n");
+    updateClientValues();
     printf("=============================================\n");
-    /*
-        strcpy(cliente->nome, nome);
-        strcpy(cliente->cpf, cpf);
-        strcpy(cliente->endereco, endereco);
-        strcpy(cliente->telefone, telefone);
-    */
 
     printf(" Cadastro atualizado com sucesso! \n");
 }
@@ -106,18 +99,9 @@ void controle_clientes()
             listaClientes();
             break;
         case '3':
-        {
-
             system("cls||clear");
-            char cpf[11];
-
-            printf("=============================================\n");
-            printf("Qual o CPF do cliente que deseja editar? \n");
-            scanf("%s", cpf);
-            getchar();
-            menu_editar_cliente(cpf);
-        }
-        break;
+            menu_editar_cliente();
+            break;
         case '4':
 
             system("cls||clear");

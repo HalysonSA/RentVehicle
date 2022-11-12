@@ -6,4 +6,5 @@ int onlyNumberInput(char *);
 int onlyTextInput(char *);
 Veiculo *inputVehicleValues(void);
 Cliente *inputClientValues(void);
+void updateClientValues(void);
 void inputRentalValues(char *, char *, char *, char *);

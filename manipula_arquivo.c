@@ -9,11 +9,14 @@ Cliente *buscaCliente(void)
     FILE *fp;
     Cliente *cliente;
 
+    cliente = (Cliente *)malloc(sizeof(Cliente));
+    
     char cpf_cliente[15];
+
     printf("Informe o CPF do Cliente: ");
     scanf("%s", cpf_cliente);
+    getchar();
 
-    cliente = (Cliente *)malloc(sizeof(Cliente));
     fp = fopen("clientes.dat", "rb");
     if (fp == NULL)
     {
@@ -24,7 +27,7 @@ Cliente *buscaCliente(void)
     while (!feof(fp))
     {
         fread(cliente, sizeof(Cliente), 1, fp);
-        if (cliente->cpf == cpf_cliente)
+        if (!strcmp(cliente->cpf, cpf_cliente))
         {
             fclose(fp);
             return cliente;

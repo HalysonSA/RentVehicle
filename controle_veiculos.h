@@ -7,6 +7,7 @@ typedef struct
     char placa[10];
     char valor[50];
     char cor[20];
+    char status;
 
 } Veiculo;
 void controle_veiculos(void);

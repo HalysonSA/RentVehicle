@@ -6,6 +6,7 @@
 #include "element_validation.h"
 #include "controle_clientes.h"
 #include "controle_veiculos.h"
+#include "manipula_arquivo.h"
 
 const int True2 = 1;
 const int False2 = 0;
@@ -130,6 +131,7 @@ Veiculo *inputVehicleValues(void)
     strcpy(veiculo->placa, placa);
     strcpy(veiculo->valor, valor);
     strcpy(veiculo->cor, cor);
+    veiculo->status = 'v';
 
     return veiculo;
 }
@@ -172,8 +174,64 @@ Cliente *inputClientValues(void)
     strcpy(cliente->cpf, cpf);
     strcpy(cliente->endereco, endereco);
     strcpy(cliente->telefone, telefone);
+    cliente->status = 'v';
 
     return cliente;
+}
+
+//WIP
+void updateClientValues(void)
+{
+    FILE * file = fopen("clientes.dat", "r+b");
+    Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
+
+    char nome[50];
+    char telefone[20];
+    char endereco[50];
+    
+    cliente = buscaCliente();
+
+    if(file){
+
+        if(cliente->nome == NULL){
+            printf("Cliente nao existe");
+        }
+            
+        do
+        {
+            printf(" Digite o nome: \n");
+            fgets(nome, sizeof nome, stdin);
+
+        } while (onlyTextInput(nome) == False2);
+
+        do
+        {
+            printf(" Digite o endereco: \n");
+            fgets(endereco, sizeof endereco, stdin);
+        } while (onlyNumberAndTextInput(endereco) == False2);
+
+        do
+        {
+            printf(" Digite o telefone: \n");
+            fgets(telefone, sizeof telefone, stdin);
+        } while (onlyNumberInput(telefone) == False2);
+    
+        strcpy(cliente->nome, nome);
+        strcpy(cliente->endereco, endereco);
+        strcpy(cliente->telefone, telefone);
+
+
+        long int menos_um = -1;
+        fseek(file,menos_um *sizeof(Cliente ), SEEK_CUR);
+        fwrite(cliente, sizeof(Cliente), 1, file);
+
+        fclose(file);
+        free(cliente);
+    }
+    else{
+        printf("Erro ao abrir o arquivo");
+    }
+
 }
 
 void inputRentalValues(char *valor, char *data, char *cliente, char *placa)
