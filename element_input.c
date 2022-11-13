@@ -131,7 +131,7 @@ Veiculo *inputVehicleValues(void)
     strcpy(veiculo->placa, placa);
     strcpy(veiculo->valor, valor);
     strcpy(veiculo->cor, cor);
-    veiculo->status = 'v';
+    veiculo->status = 1;
 
     return veiculo;
 }
@@ -174,29 +174,34 @@ Cliente *inputClientValues(void)
     strcpy(cliente->cpf, cpf);
     strcpy(cliente->endereco, endereco);
     strcpy(cliente->telefone, telefone);
-    cliente->status = 'v';
+    cliente->status = 1;
 
     return cliente;
 }
 
-//WIP
 void updateClientValues(void)
 {
-    FILE * file = fopen("clientes.dat", "r+b");
+    FILE *file = fopen("clientes.dat", "r+b");
     Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
+    Cliente *aux_cliente = (Cliente *)malloc(sizeof(Cliente));
+
+    int found = 0;
 
     char nome[50];
     char telefone[20];
     char endereco[50];
-    
+
     cliente = buscaCliente();
 
-    if(file){
+    if (file)
+    {
 
-        if(cliente->nome == NULL){
+        if (cliente->nome == NULL)
+        {
             printf("Cliente nao existe");
+            exit(1);
         }
-            
+
         do
         {
             printf(" Digite o nome: \n");
@@ -215,23 +220,128 @@ void updateClientValues(void)
             printf(" Digite o telefone: \n");
             fgets(telefone, sizeof telefone, stdin);
         } while (onlyNumberInput(telefone) == False2);
-    
+
         strcpy(cliente->nome, nome);
         strcpy(cliente->endereco, endereco);
         strcpy(cliente->telefone, telefone);
 
-
         long int menos_um = -1;
-        fseek(file,menos_um *sizeof(Cliente ), SEEK_CUR);
-        fwrite(cliente, sizeof(Cliente), 1, file);
+
+        // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
+
+        while (!feof(file) && !found)
+        {
+            fread(aux_cliente, sizeof(Cliente), 1, file);
+
+            if (strcmp(aux_cliente->cpf, cliente->cpf) == 0)
+            {
+                found = 1;
+
+                fseek(file, (menos_um) * sizeof(Cliente), SEEK_CUR);
+
+                fwrite(cliente, sizeof(Cliente), 1, file);
+            }
+        }
+        //////////////////////////////////
 
         fclose(file);
         free(cliente);
+        free(aux_cliente);
     }
-    else{
+    else
+    {
         printf("Erro ao abrir o arquivo");
     }
+}
 
+void updateVehicleValues(void)
+{
+    FILE *file = fopen("veiculos.dat", "r+b");
+    Veiculo *veiculo = (Veiculo *)malloc(sizeof(Veiculo));
+    Veiculo *aux_veiculo = (Veiculo *)malloc(sizeof(Veiculo));
+
+    int found = 0;
+    char modelo[30];
+    char marca[30];
+    char ano[10];
+    char valor[50];
+    char cor[20];
+
+    veiculo = buscaVeiculo();
+
+    if (file)
+    {
+
+        if (veiculo->modelo == NULL)
+        {
+            printf("Veiculo nao existe");
+            exit(1);
+        }
+        else
+        {
+
+            do
+            {
+                printf(" Digite a marca: \n");
+                fgets(marca, sizeof marca, stdin);
+
+            } while (onlyTextInput(marca) == False2);
+
+            do
+            {
+                printf(" Digite o modelo: \n");
+                fgets(modelo, sizeof modelo, stdin);
+
+            } while (onlyTextInput(modelo) == False2);
+
+            do
+            {
+                printf(" Digite o ano: \n");
+                fgets(ano, sizeof ano, stdin);
+            } while (onlyNumberInput(ano) == False2);
+
+            do
+            {
+                printf(" Digite o valor: \n");
+                fgets(valor, sizeof valor, stdin);
+            } while (onlyNumberInput(valor) == False2);
+
+            do
+            {
+                printf(" Digite a cor: \n");
+                fgets(cor, sizeof cor, stdin);
+            } while (onlyTextInput(cor) == False2);
+
+            strcpy(veiculo->marca, marca);
+            strcpy(veiculo->modelo, modelo);
+            strcpy(veiculo->ano, ano);
+            strcpy(veiculo->valor, valor);
+            strcpy(veiculo->cor, cor);
+
+            long int menos_um = -1;
+
+            while (!feof(file) && !found)
+            {
+                fread(aux_veiculo, sizeof(Veiculo), 1, file);
+
+                if (strcmp(aux_veiculo->placa, veiculo->placa) == 0)
+                {
+                    found = 1;
+
+                    fseek(file, menos_um * sizeof(Veiculo), SEEK_CUR);
+                    fwrite(veiculo, sizeof(Veiculo), 1, file);
+                }
+            }
+
+            fclose(file);
+            free(veiculo);
+            free(aux_veiculo);
+        }
+    }
+    else
+    {
+        printf("Erro ao abrir o arquivo");
+    }
 }
 
 void inputRentalValues(char *valor, char *data, char *cliente, char *placa)

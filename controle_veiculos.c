@@ -24,7 +24,8 @@ void menu_cadastrar_veiculo()
 
 void menu_relatorio_veiculo(Veiculo *veiculo)
 {
-    if (veiculo[0].marca != NULL)
+
+    if (veiculo[0].marca != NULL && veiculo[0].status != 0)
     {
         printf("Marca do veiculo: %s \n", veiculo->marca);
         printf("Modelo do veiculo: %s \n", veiculo->modelo);
@@ -40,13 +41,12 @@ void menu_relatorio_veiculo(Veiculo *veiculo)
     printf("=============================================\n");
 }
 
-void menu_editar_veiculo(char *veiculo)
+void menu_editar_veiculo(void)
 {
 
     printf("=============================================\n");
-    printf("Em Desenvolvimento... \n");
+    updateVehicleValues();
     printf("=============================================\n");
-    getchar();
     printf(" Cadastro atualizado com sucesso! \n");
 }
 
@@ -99,19 +99,12 @@ void controle_veiculos()
             printf("=============================================\n");
             printf("====  Relatorio de veiculos cadastrados  ====\n");
             printf("=============================================\n");
-
             listaVeiculos();
             break;
         case '3':
         {
-
             system("cls||clear");
-            char veiculo[7];
-
-            printf("Digite a placa do veiculo:  \n");
-            scanf("%s", veiculo);
-            getchar();
-            menu_editar_veiculo(veiculo);
+            menu_editar_veiculo();
         }
         break;
         case '4':

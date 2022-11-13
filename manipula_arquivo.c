@@ -3,6 +3,7 @@
 #include <string.h>
 #include "controle_clientes.h"
 #include "controle_veiculos.h"
+#include "element_validation.h"
 
 Cliente *buscaCliente(void)
 {
@@ -10,12 +11,17 @@ Cliente *buscaCliente(void)
     Cliente *cliente;
 
     cliente = (Cliente *)malloc(sizeof(Cliente));
-    
+
     char cpf_cliente[15];
 
-    printf("Informe o CPF do Cliente: ");
-    scanf("%s", cpf_cliente);
-    getchar();
+    do
+    {
+
+        printf("Informe o CPF do Cliente: ");
+        scanf("%s", cpf_cliente);
+        getchar();
+
+    } while (CPFValidation(cpf_cliente) == 0);
 
     fp = fopen("clientes.dat", "rb");
     if (fp == NULL)
@@ -33,6 +39,45 @@ Cliente *buscaCliente(void)
             return cliente;
         }
     }
+    fclose(fp);
+    return NULL;
+}
+
+Veiculo *buscaVeiculo(void)
+{
+    FILE *fp = fopen("veiculos.dat", "rb");
+    Veiculo *veiculo;
+
+    veiculo = (Veiculo *)malloc(sizeof(Veiculo));
+
+    char placa[8];
+
+    do
+    {
+
+        printf("Informe a placa do veiculo: ");
+        scanf("%s", placa);
+        getchar();
+
+    } while (carPlateValidation(placa) == 0);
+
+    if (fp == NULL)
+    {
+        printf("Ocorreu um erro na abertura do arquivo!\n");
+        getchar();
+
+        exit(1);
+    }
+    while (!feof(fp))
+    {
+        fread(veiculo, sizeof(Veiculo), 1, fp);
+        if (!strcmp(veiculo->placa, placa))
+        {
+            fclose(fp);
+            return veiculo;
+        }
+    }
+
     fclose(fp);
     return NULL;
 }

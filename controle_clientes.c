@@ -41,7 +41,6 @@ void menu_editar_cliente()
     printf("=============================================\n");
     updateClientValues();
     printf("=============================================\n");
-
     printf(" Cadastro atualizado com sucesso! \n");
 }
 
