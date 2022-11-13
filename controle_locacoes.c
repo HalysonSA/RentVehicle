@@ -5,7 +5,7 @@
 #include <string.h>
 #include "element_validation.h"
 #include "element_input.h"
-#include "controle_locacoes.h"
+#include "manipula_arquivo.h"
 
 Locacao *locacao;
 
@@ -13,46 +13,36 @@ void menu_cadastrar_locacao()
 {
     locacao = (Locacao *)malloc(10 * sizeof(Locacao));
 
-    char valor[15], data[10], cliente[11], placa[7];
-
     printf("=============================================\n");
-    inputRentalValues(valor, data, cliente, placa);
+    locacao = inputRentalValues();
+    gravaArquivoLocacao(locacao);
     printf("=============================================\n");
-    strcpy(locacao->valor, valor);
-    strcpy(locacao->data, data);
-    strcpy(locacao->cliente, cliente);
-    strcpy(locacao->placa, placa);
-
     printf(" Cadastro realizado com sucesso! \n");
-
-    
 }
 
-void menu_relatorio_locacao()
+void menu_relatorio_locacao(Locacao *locacao)
 {
-    printf("=============================================\n");
-    printf("====  Relatorio de Locações cadastradas  ====\n");
-    printf("=============================================\n");
-    if (locacao[0].valor != NULL)
+    if (locacao[0].valor != NULL && locacao[0].status != 0)
     {
-        printf("Nome do cliente: %s \n", locacao->cliente);
-        printf("Placa do Veiculo: %s \n", locacao->placa);
-        printf("Data da Locação: %s \n", locacao->data);
-        printf("Valor da Locação: %s \n", locacao->valor);
+        printf("Cliente: %s \n", locacao->cliente);
+        printf("Veiculo: %s \n", locacao->placa);
+        printf("Data de inicio da locacao: %s \n", locacao->data_locacao);
+        printf("Data de fim da locacao: %s \n", locacao->data_devolucao);
+        printf("Valor da locacao: %s \n", locacao->valor);
     }
     else
     {
         printf("Nenhuma locacao cadastrada! \n");
     }
+
     printf("=============================================\n");
 }
 
-void menu_editar_locacao(char *locacao)
+void menu_editar_locacao(void)
 {
-    char valor[15], data[10], cliente[11], placa[7];
 
     printf("=============================================\n");
-    inputRentalValues(valor, data, cliente, placa);
+    updateRentalValues();
     printf("=============================================\n");
 
     printf(" Cadastro atualizado com sucesso! \n");
@@ -102,20 +92,18 @@ void controle_locacoes()
             menu_cadastrar_locacao();
             break;
         case '2':
-            menu_relatorio_locacao();
-            break;
-        case '3':
-        {
-            char cpf[11];
 
             printf("=============================================\n");
-            printf("Qual o CPF do cliente que deseja editar? \n");
-            scanf("%s", cpf);
-            getchar();
-            menu_editar_locacao(cpf);
-        }
+            printf("====  Relatorio de Locacoes cadastradas  ====\n");
+            printf("=============================================\n");
+            listaLocacoes();
+            break;
+        case '3':
 
-        break;
+            system("cls||clear");
+            menu_editar_locacao();
+
+            break;
         case '4':
             menu_remover_locacao();
             break;

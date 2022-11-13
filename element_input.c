@@ -6,6 +6,7 @@
 #include "element_validation.h"
 #include "controle_clientes.h"
 #include "controle_veiculos.h"
+#include "controle_locacoes.h"
 #include "manipula_arquivo.h"
 
 const int True2 = 1;
@@ -13,7 +14,7 @@ const int False2 = 0;
 
 int onlyNumberAndTextInput(char *text)
 {
-    if (strpbrk(text, "0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\x0b\x0c") == NULL)
+    if (strpbrk(text, "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\x0b\x0c") == NULL)
     {
 
         size_t ln = strlen(text) - 1;
@@ -344,33 +345,113 @@ void updateVehicleValues(void)
     }
 }
 
-void inputRentalValues(char *valor, char *data, char *cliente, char *placa)
+void updateRentalValues(void)
 {
-    do
+    FILE *file = fopen("locacoes.dat", "r+b");
+    Locacao *locacao = (Locacao *)malloc(sizeof(Locacao));
+    Locacao *aux_locacao = (Locacao *)malloc(sizeof(Locacao));
+
+    int found = 0;
+
+    char data_locacao[20];
+    char data_devolucao[20];
+
+    locacao = buscaLocacao();
+
+    if (file)
     {
-        printf("Digite o valor da locacao:  \n");
-        scanf("%s", valor);
-    } while (onlyNumberInput(valor) == False2);
-    getchar();
+
+        if (locacao->cliente == NULL)
+        {
+            printf("Cliente nao existe");
+            exit(1);
+        }
+
+        do
+        {
+            printf(" Digite a data de locacao: \n");
+            fgets(data_locacao, sizeof data_locacao, stdin);
+
+        } while (onlyNumberInput(data_locacao) == 0);
+
+        do
+        {
+            printf(" Digite a data de devolucao: \n");
+            fgets(data_devolucao, sizeof data_devolucao, stdin);
+        } while (onlyNumberInput(data_devolucao) == 0);
+
+        strcpy(locacao->data_locacao, data_locacao);
+        strcpy(locacao->data_devolucao, data_devolucao);
+
+        long int menos_um = -1;
+
+        // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
+
+        while (!feof(file) && !found)
+        {
+            fread(aux_locacao, sizeof(Locacao), 1, file);
+
+            if (strcmp(aux_locacao->cliente, locacao->cliente) == 0)
+            {
+                found = 1;
+
+                fseek(file, (menos_um) * sizeof(Locacao), SEEK_CUR);
+
+                fwrite(locacao, sizeof(Locacao), 1, file);
+            }
+        }
+        //////////////////////////////////
+
+        fclose(file);
+        free(locacao);
+        free(aux_locacao);
+    }
+    else
+    {
+        printf("Erro ao abrir o arquivo");
+    }
+}
+
+Locacao *inputRentalValues(void)
+{
+    Locacao *locacao = (Locacao *)malloc(sizeof(Locacao));
+
+    char placa[10];
+    char cpf[15];
+    char data[15];
+    char valor[50];
 
     do
     {
-        printf("Digite a data da locacao(dd/mm/aaaa):  \n");
-        scanf("%s", data);
-    } while (onlyNumberAndTextInput(data) == False2);
-    getchar(); // Ou pegar a data do sistema // Aplicar o mesmo modelo do cpf
+        printf("Digite o CPF do cliente: \n");
+        fgets(cpf, sizeof cpf, stdin);
+
+    } while (CPFValidation(cpf) == 0);
 
     do
     {
-        printf("Digite o CPF do cliente:  \n");
-        scanf("%s", cliente);
-    } while (CPFValidation(cliente) == False2);
-    getchar();
+        printf("Digite a placa do veiculo: \n");
+        fgets(placa, sizeof placa, stdin);
+    } while (carPlateValidation(placa) == 0);
 
     do
     {
-        printf("Digite a placa do veiculo:  \n");
-        scanf("%s", placa);
-    } while (carPlateValidation(placa) == False2);
-    getchar();
+        printf("Data da locacao: \n");
+        fgets(data, sizeof data, stdin);
+    } while (onlyNumberAndTextInput(data) == 0);
+
+    do
+    {
+        printf("Valor combinado: \n");
+        fgets(valor, sizeof valor, stdin);
+    } while (onlyNumberInput(valor) == 0);
+
+    strcpy(locacao->placa, placa);
+    strcpy(locacao->cliente, cpf);
+    strcpy(locacao->data_locacao, data);
+    strcpy(locacao->data_devolucao, "Aguardando devolucao");
+    strcpy(locacao->valor, valor);
+    locacao->status = 1;
+
+    return locacao;
 }

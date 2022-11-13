@@ -3,6 +3,7 @@
 #include <string.h>
 #include "controle_clientes.h"
 #include "controle_veiculos.h"
+#include "controle_locacoes.h"
 #include "element_validation.h"
 
 Cliente *buscaCliente(void)
@@ -82,6 +83,46 @@ Veiculo *buscaVeiculo(void)
     return NULL;
 }
 
+Locacao *buscaLocacao(void)
+{
+    FILE *fp = fopen("locacoes.dat", "rb");
+    Locacao *locacao;
+
+    locacao = (Locacao *)malloc(sizeof(Locacao));
+
+    char placa[8];
+
+    do
+    {
+
+        printf("Informe a placa do veiculo: ");
+        scanf("%s", placa);
+        getchar();
+
+    } while (carPlateValidation(placa) == 0);
+
+    if (fp == NULL)
+    {
+        printf("Ocorreu um erro na abertura do arquivo!\n");
+        getchar();
+
+        exit(1);
+    }
+    while (!feof(fp))
+    {
+        fread(locacao, sizeof(Locacao), 1, fp);
+        if (!strcmp(locacao->placa, placa))
+        {
+            fclose(fp);
+            return locacao;
+        }
+    }
+
+    free(locacao);
+    fclose(fp);
+    return NULL;
+}
+
 void listaClientes(void)
 {
     FILE *fp;
@@ -128,6 +169,28 @@ void listaVeiculos(void)
     free(veiculo);
 }
 
+void listaLocacoes(void)
+{
+    FILE *fp;
+    Locacao *locacao;
+
+    locacao = (Locacao *)malloc(sizeof(Locacao));
+
+    fp = fopen("locacoes.dat", "rb");
+
+    if (fp == NULL)
+    {
+        printf("Ocorreu um erro na abertura do arquivo!\n");
+        exit(1);
+    }
+    while (fread(locacao, sizeof(Locacao), 1, fp))
+    {
+        menu_relatorio_locacao(locacao);
+    }
+    fclose(fp);
+    free(locacao);
+}
+
 void gravaArquivoCliente(Cliente *cliente)
 {
     FILE *fp;
@@ -153,5 +216,19 @@ void gravaArquivoVeiculo(Veiculo *veiculo)
         exit(1);
     }
     fwrite(veiculo, sizeof(Veiculo), 1, fp);
+    fclose(fp);
+}
+
+void gravaArquivoLocacao(Locacao *locacao)
+{
+    FILE *fp;
+    fp = fopen("locacoes.dat", "ab");
+    if (fp == NULL)
+    {
+        printf("Ocorreu um erro na abertura do arquivo!\n");
+        getchar();
+        exit(1);
+    }
+    fwrite(locacao, sizeof(Locacao), 1, fp);
     fclose(fp);
 }
