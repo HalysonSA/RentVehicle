@@ -50,13 +50,7 @@ void menu_editar_locacao(void)
 
 void menu_remover_locacao()
 {
-    char cpf[11];
-
-    printf("=============================================\n");
-    printf("Digite o CPF do cliente:  \n");
-    scanf("%s", cpf);
-    getchar();
-    printf("=============================================\n");
+    deleteRentalValues();
     printf(" Locacao removida com sucesso! \n");
 }
 

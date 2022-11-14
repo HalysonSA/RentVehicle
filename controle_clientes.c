@@ -22,7 +22,7 @@ void menu_cadastro_cliente()
 void menu_relatorio_cliente(Cliente *cliente)
 {
 
-    if (cliente[0].nome != NULL)
+    if (cliente[0].nome != NULL && cliente[0].status == 1)
     {
         printf("Nome do cliente: %s \n", cliente->nome);
         printf("CPF do cliente: %s \n", cliente->cpf);
@@ -46,12 +46,7 @@ void menu_editar_cliente()
 
 void menu_remover_cliente()
 {
-    char cpf[11];
-    printf("=============================================\n");
-    printf(" Digite o CPF do cliente: \n");
-    scanf("%s", cpf);
-    getchar();
-    printf("=============================================\n");
+    deleteClientValues();
     printf(" Cliente removido com sucesso! \n");
 }
 

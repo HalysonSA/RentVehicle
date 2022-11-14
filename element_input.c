@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "element_validation.h"
 #include "controle_clientes.h"
 #include "controle_veiculos.h"
@@ -137,9 +138,88 @@ Veiculo *inputVehicleValues(void)
     return veiculo;
 }
 
+// //WIP
+// void verifyCPFInFile(char* cpf){
+//     Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
+//     FILE *fp = fopen("clientes.dat", "rb");
+    
+//     if(access("clientes.dat",F_OK) != -1){
+//         if (fp == NULL)
+//         {
+//             printf("Ocorreu um erro na abertura do arquivo!\n");
+//             exit(1);
+//         }
+//         while (!feof(fp)){
+//             fread(cliente, sizeof(Cliente), 1, fp);
+//             //entra até aqui
+//             printf(cliente->cpf);
+//             printf("_");
+//             printf(cpf);
+            
+//             if (!strcmp(cliente->cpf, cpf)){
+//                 printf("CPF já foi usado");
+//                 if (cliente->status == 0)
+//                 {
+//                     printf("CPF Inativo");
+//                     //cpf já foi utilizado e está desativado, deseja reativar?
+//                     //retorna para o menu com o perfil reativado ou não
+//                 }else if(cliente->status == 1){
+//                     printf("CPF Ativo");
+//                     //cpf já foi utilizado e está ativo
+//                     //retorna para o menu
+//                 }
+//             }
+            
+//             //continua normalmente
+//             exit(1);
+            
+//         }
+//     }
+// }
+
+//Charles Version
+// void verifyCPFInFile(char* cpf){
+//     Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
+//     FILE *fp = fopen("clientes.dat", "rb");
+    
+//     if(access("clientes.dat",F_OK) != -1){
+//         if (fp == NULL)
+//         {
+//             printf("Ocorreu um erro na abertura do arquivo!\n");
+//             exit(1);
+//         }
+//         while (fread(cliente, sizeof(Cliente), 1, fp)) {
+//             //entra até aqui
+//             printf(cliente->cpf);
+//             printf("_");
+//             printf(cpf);
+            
+//             if (!strcmp(cliente->cpf, cpf)){
+//                 printf("CPF já foi usado");
+//                 if (cliente->status == 0)
+//                 {
+//                     printf("CPF Inativo");
+//                     //cpf já foi utilizado e está desativado, deseja reativar?
+//                     //retorna para o menu com o perfil reativado ou não
+//                 }else if(cliente->status == 1){
+//                     printf("CPF Ativo");
+//                     //cpf já foi utilizado e está ativo
+//                     //retorna para o menu
+//                 }
+//             }
+            
+//             //continua normalmente
+//             exit(1); //exit pra testar se a função tá rodando
+            
+//         }
+//     }
+// }
+
 Cliente *inputClientValues(void)
 {
     Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
+
+
 
     char nome[50];
     char cpf[15];
@@ -157,6 +237,8 @@ Cliente *inputClientValues(void)
     {
         printf(" Digite o CPF: \n");
         fgets(cpf, sizeof cpf, stdin);
+        //verifyCPFInFile(cpf);
+        
     } while (CPFValidation(cpf) == False2);
 
     do
@@ -225,6 +307,49 @@ void updateClientValues(void)
         strcpy(cliente->nome, nome);
         strcpy(cliente->endereco, endereco);
         strcpy(cliente->telefone, telefone);
+
+        long int menos_um = -1;
+
+        // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
+
+        while (!feof(file) && !found)
+        {
+            fread(aux_cliente, sizeof(Cliente), 1, file);
+
+            if (strcmp(aux_cliente->cpf, cliente->cpf) == 0)
+            {
+                found = 1;
+
+                fseek(file, (menos_um) * sizeof(Cliente), SEEK_CUR);
+
+                fwrite(cliente, sizeof(Cliente), 1, file);
+            }
+        }
+        //////////////////////////////////
+
+        fclose(file);
+        free(cliente);
+        free(aux_cliente);
+    }
+    else
+    {
+        printf("Erro ao abrir o arquivo");
+    }
+}
+
+void deleteClientValues(void)
+{
+    FILE *file = fopen("clientes.dat", "r+b");
+    Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
+    Cliente *aux_cliente = (Cliente *)malloc(sizeof(Cliente));
+
+    int found = 0;
+
+    cliente = buscaCliente();
+    if (file)
+    {
+
+        cliente->status = 0;
 
         long int menos_um = -1;
 
@@ -345,6 +470,49 @@ void updateVehicleValues(void)
     }
 }
 
+void deleteVehicleValues(void)
+{
+    FILE *file = fopen("veiculos.dat", "r+b");
+    Veiculo *veiculo = (Veiculo *)malloc(sizeof(Veiculo));
+    Veiculo *aux_veiculo = (Veiculo *)malloc(sizeof(Veiculo));
+
+    int found = 0;
+
+    veiculo = buscaVeiculo();
+    if (file)
+    {
+
+        veiculo->status = 0;
+
+        long int menos_um = -1;
+
+        // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
+
+        while (!feof(file) && !found)
+        {
+            fread(aux_veiculo, sizeof(Veiculo), 1, file);
+
+            if (strcmp(aux_veiculo->placa, veiculo->placa) == 0)
+            {
+                found = 1;
+
+                fseek(file, (menos_um) * sizeof(Veiculo), SEEK_CUR);
+
+                fwrite(veiculo, sizeof(Veiculo), 1, file);
+            }
+        }
+        //////////////////////////////////
+
+        fclose(file);
+        free(veiculo);
+        free(aux_veiculo);
+    }
+    else
+    {
+        printf("Erro ao abrir o arquivo");
+    }
+}
+
 void updateRentalValues(void)
 {
     FILE *file = fopen("locacoes.dat", "r+b");
@@ -382,6 +550,49 @@ void updateRentalValues(void)
 
         strcpy(locacao->data_locacao, data_locacao);
         strcpy(locacao->data_devolucao, data_devolucao);
+
+        long int menos_um = -1;
+
+        // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
+
+        while (!feof(file) && !found)
+        {
+            fread(aux_locacao, sizeof(Locacao), 1, file);
+
+            if (strcmp(aux_locacao->cliente, locacao->cliente) == 0)
+            {
+                found = 1;
+
+                fseek(file, (menos_um) * sizeof(Locacao), SEEK_CUR);
+
+                fwrite(locacao, sizeof(Locacao), 1, file);
+            }
+        }
+        //////////////////////////////////
+
+        fclose(file);
+        free(locacao);
+        free(aux_locacao);
+    }
+    else
+    {
+        printf("Erro ao abrir o arquivo");
+    }
+}
+
+void deleteRentalValues(void)
+{
+    FILE *file = fopen("locacoes.dat", "r+b");
+    Locacao *locacao = (Locacao *)malloc(sizeof(Locacao));
+    Locacao *aux_locacao = (Locacao *)malloc(sizeof(Locacao));
+
+    int found = 0;
+
+    locacao = buscaLocacao();
+    if (file)
+    {
+
+        locacao->status = 0;
 
         long int menos_um = -1;
 

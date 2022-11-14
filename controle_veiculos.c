@@ -52,12 +52,7 @@ void menu_editar_veiculo(void)
 
 void menu_remover_veiculo()
 {
-    char placa[7];
-    printf("=============================================\n");
-    printf("Digite a placa do veiculo:  \n");
-    scanf("%s", placa);
-    getchar();
-    printf("=============================================\n");
+    deleteVehicleValues();
     printf(" Veiculo removido com sucesso! \n");
 }
 
