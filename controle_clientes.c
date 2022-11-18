@@ -14,7 +14,9 @@ void menu_cadastro_cliente()
     cliente = (Cliente *)malloc(sizeof(Cliente));
     printf("=============================================\n");
     cliente = inputClientValues();
+
     gravaArquivoCliente(cliente);
+
     printf("=============================================\n");
     printf(" Cadastro realizado com sucesso! \n");
 }

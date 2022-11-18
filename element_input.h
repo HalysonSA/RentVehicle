@@ -15,4 +15,4 @@ void deleteVehicleValues(void);
 void updateRentalValues(void);
 void deleteRentalValues(void);
 
-void verifyCPFInFile(char *);
+int verifyCPFInFile(char *);

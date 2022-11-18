@@ -28,8 +28,7 @@ Cliente *buscaCliente(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        getchar();
-        exit(1);
+        controle_clientes();
     }
     while (!feof(fp))
     {
@@ -135,7 +134,7 @@ void listaClientes(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        exit(1);
+        controle_clientes();
     }
     while (fread(cliente, sizeof(Cliente), 1, fp))
     {

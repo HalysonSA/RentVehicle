@@ -138,88 +138,43 @@ Veiculo *inputVehicleValues(void)
     return veiculo;
 }
 
-// //WIP
-// void verifyCPFInFile(char* cpf){
-//     Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
-//     FILE *fp = fopen("clientes.dat", "rb");
-    
-//     if(access("clientes.dat",F_OK) != -1){
-//         if (fp == NULL)
-//         {
-//             printf("Ocorreu um erro na abertura do arquivo!\n");
-//             exit(1);
-//         }
-//         while (!feof(fp)){
-//             fread(cliente, sizeof(Cliente), 1, fp);
-//             //entra até aqui
-//             printf(cliente->cpf);
-//             printf("_");
-//             printf(cpf);
-            
-//             if (!strcmp(cliente->cpf, cpf)){
-//                 printf("CPF já foi usado");
-//                 if (cliente->status == 0)
-//                 {
-//                     printf("CPF Inativo");
-//                     //cpf já foi utilizado e está desativado, deseja reativar?
-//                     //retorna para o menu com o perfil reativado ou não
-//                 }else if(cliente->status == 1){
-//                     printf("CPF Ativo");
-//                     //cpf já foi utilizado e está ativo
-//                     //retorna para o menu
-//                 }
-//             }
-            
-//             //continua normalmente
-//             exit(1);
-            
-//         }
-//     }
-// }
+int verifyCPFInFile(char *cpf)
+{
+    Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
+    FILE *fp = fopen("clientes.dat", "rb");
 
-//Charles Version
-// void verifyCPFInFile(char* cpf){
-//     Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
-//     FILE *fp = fopen("clientes.dat", "rb");
-    
-//     if(access("clientes.dat",F_OK) != -1){
-//         if (fp == NULL)
-//         {
-//             printf("Ocorreu um erro na abertura do arquivo!\n");
-//             exit(1);
-//         }
-//         while (fread(cliente, sizeof(Cliente), 1, fp)) {
-//             //entra até aqui
-//             printf(cliente->cpf);
-//             printf("_");
-//             printf(cpf);
-            
-//             if (!strcmp(cliente->cpf, cpf)){
-//                 printf("CPF já foi usado");
-//                 if (cliente->status == 0)
-//                 {
-//                     printf("CPF Inativo");
-//                     //cpf já foi utilizado e está desativado, deseja reativar?
-//                     //retorna para o menu com o perfil reativado ou não
-//                 }else if(cliente->status == 1){
-//                     printf("CPF Ativo");
-//                     //cpf já foi utilizado e está ativo
-//                     //retorna para o menu
-//                 }
-//             }
-            
-//             //continua normalmente
-//             exit(1); //exit pra testar se a função tá rodando
-            
-//         }
-//     }
-// }
+    if (access("clientes.dat", F_OK) != -1)
+    {
+        if (fp == NULL)
+        {
+            printf("Ocorreu um erro na abertura do arquivo!\n");
+            exit(1);
+        }
+
+        while (!feof(fp))
+        {
+            fread(cliente, sizeof(Cliente), 1, fp);
+
+            cpf[strcspn(cpf, "\n")] = 0;
+            cliente->cpf[strcspn(cliente->cpf, "\n")] = 0;
+
+            if (!strcmp(cliente->cpf, cpf))
+            {
+                printf("Cliente ja cadastrado! digite outro CPF \n");
+                return 1;
+            }
+        }
+        return 0;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
 Cliente *inputClientValues(void)
 {
     Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
-
-
 
     char nome[50];
     char cpf[15];
@@ -237,9 +192,8 @@ Cliente *inputClientValues(void)
     {
         printf(" Digite o CPF: \n");
         fgets(cpf, sizeof cpf, stdin);
-        //verifyCPFInFile(cpf);
-        
-    } while (CPFValidation(cpf) == False2);
+
+    } while (CPFValidation(cpf) == False2 || verifyCPFInFile(cpf) == 1);
 
     do
     {
@@ -346,6 +300,7 @@ void deleteClientValues(void)
     int found = 0;
 
     cliente = buscaCliente();
+
     if (file)
     {
 
