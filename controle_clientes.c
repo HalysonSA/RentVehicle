@@ -61,6 +61,7 @@ char menu_clientes(void)
     printf("======    2 - Relatorio clientes    ======\n");
     printf("======    3 - Editar cliente        ======\n");
     printf("======    4 - Remover cliente       ======\n");
+    printf("======    5 - Buscar cliente        ======\n");
     printf("======    0 - Voltar ao menu        ======\n");
     printf("==========================================\n");
 
@@ -102,6 +103,23 @@ void controle_clientes()
 
             system("cls||clear");
             menu_remover_cliente();
+            break;
+
+        case '5':
+            system("cls||clear");
+
+            Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
+            cliente = buscaCliente();
+            printf("=============================================\n");
+            if (cliente != NULL)
+            {
+                menu_relatorio_cliente(cliente);
+            }
+            else
+            {
+                printf("Cliente nao encontrado! \n");
+            }
+            printf("=============================================\n");
             break;
         default:
             printf("Opcao invalida\n");

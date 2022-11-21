@@ -101,10 +101,11 @@ int verifyPlateInFile(char *placa)
 
             if (!strcmp(veiculo->placa, placa))
             {
-                printf("Veiculo ja cadastrado! digite outra placa \n");
+                printf("Veiculo existe! \n");
                 return 1;
             }
         }
+        printf("Veiculo inexistente \n");
         return 0;
     }
     else
@@ -194,10 +195,11 @@ int verifyCPFInFile(char *cpf)
 
             if (!strcmp(cliente->cpf, cpf))
             {
-                printf("Cliente ja cadastrado! digite outro CPF \n");
+                printf("Cliente existe! \n");
                 return 1;
             }
         }
+        printf("Cliente inexistente! \n");
         return 0;
     }
     else
@@ -617,16 +619,16 @@ Locacao *inputRentalValues(void)
     Locacao *locacao = (Locacao *)malloc(sizeof(Locacao));
 
     char placa[10];
-    char cpf[15];
     char data[15];
     char valor[50];
+    char cliente[15];
 
     do
     {
         printf("Digite o CPF do cliente: \n");
-        fgets(cpf, sizeof cpf, stdin);
+        fgets(cliente, sizeof cliente, stdin);
 
-    } while (CPFValidation(cpf) == False2 || verifyCPFInFile(cpf) == 0);
+    } while (CPFValidation(cliente) == False2 || verifyCPFInFile(cliente) == 0);
 
     do
     {
@@ -646,11 +648,11 @@ Locacao *inputRentalValues(void)
         fgets(valor, sizeof valor, stdin);
     } while (onlyNumberInput(valor) == 0);
 
+    strcpy(locacao->cliente, cliente);
     strcpy(locacao->placa, placa);
-    strcpy(locacao->cliente, cpf);
     strcpy(locacao->data_locacao, data);
-    strcpy(locacao->data_devolucao, "Aguardando devolucao");
     strcpy(locacao->valor, valor);
+    strcpy(locacao->data_devolucao, "Aberto");
     locacao->status = 1;
 
     return locacao;

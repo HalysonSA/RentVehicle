@@ -16,7 +16,7 @@ void menu_cadastrar_veiculo()
 
     printf("=============================================\n");
     veiculo = inputVehicleValues();
-    
+
     gravaArquivoVeiculo(veiculo);
 
     printf(" Cadastro realizado com sucesso! \n");
@@ -61,11 +61,12 @@ char menu_veiculos(void)
 {
     printf("=============================================\n");
     printf("======     CONTROLE DE VEICULOS      ========\n");
-    printf("======    1 - Cadastrar veiculo       ========\n");
-    printf("======    2 - Relatorio veiculos      ========\n");
-    printf("======    3 - Editar veiculo          ========\n");
-    printf("======    4 - Remover veiculo         ========\n");
-    printf("======    0 - Voltar ao menu          ========\n");
+    printf("======    1 - Cadastrar veiculo      ========\n");
+    printf("======    2 - Relatorio veiculos     ========\n");
+    printf("======    3 - Editar veiculo         ========\n");
+    printf("======    4 - Remover veiculo        ========\n");
+    printf("======    5 - Buscar veiculo         ========\n");
+    printf("======    0 - Voltar ao menu         ========\n");
     printf("=============================================\n");
 
     char choice;
@@ -107,6 +108,22 @@ void controle_veiculos()
 
             system("cls||clear");
             menu_remover_veiculo();
+            break;
+
+        case '5':
+            system("cls||clear");
+            Veiculo *veiculo = (Veiculo *)malloc(sizeof(Veiculo));
+            veiculo = buscaVeiculo();
+            printf("=============================================\n");
+            if (veiculo != NULL)
+            {
+                menu_relatorio_veiculo(veiculo);
+            }
+            else
+            {
+                printf("Veiculo nao encontrado! \n");
+            }
+            printf("=============================================\n");
             break;
         default:
             printf("Opcao invalida\n");

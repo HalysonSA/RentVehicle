@@ -11,13 +11,13 @@ Locacao *locacao;
 
 void menu_cadastrar_locacao()
 {
-    locacao = (Locacao *)malloc(10 * sizeof(Locacao));
+    locacao = (Locacao *)malloc(sizeof(Locacao));
 
     printf("=============================================\n");
     locacao = inputRentalValues();
 
     gravaArquivoLocacao(locacao);
-    
+
     printf("=============================================\n");
     printf(" Cadastro realizado com sucesso! \n");
 }
@@ -64,6 +64,7 @@ char menu_locacoes(void)
     printf("======    2 - Relatorio locacoes    ======\n");
     printf("======    3 - Editar locacao        ======\n");
     printf("======    4 - Remover locacao       ======\n");
+    printf("======    5 - Buscar locacao        ======\n");
     printf("======    0 - Voltar ao menu        ======\n");
     printf("==========================================\n");
 
@@ -103,6 +104,22 @@ void controle_locacoes()
         case '4':
             menu_remover_locacao();
             break;
+
+        case '5':
+            system("clear||cls");
+            Locacao *locacao = (Locacao *)malloc(sizeof(Locacao));
+            locacao = buscaLocacao();
+            printf("=============================================\n");
+            if (locacao != NULL)
+            {
+                menu_relatorio_locacao(locacao);
+            }
+            else
+            {
+                printf("Nenhuma locacao encontrada! \n");
+            }
+            printf("=============================================\n");
+            break;
         default:
             printf("Opcao invalida\n");
             break;
@@ -111,7 +128,7 @@ void controle_locacoes()
         printf("Pressione enter para continuar...\n");
         getchar();
 
-        system("cls||clear");
+        system("clear||cls");
 
         choice = menu_locacoes();
     }
