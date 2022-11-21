@@ -16,3 +16,4 @@ void updateRentalValues(void);
 void deleteRentalValues(void);
 
 int verifyCPFInFile(char *);
+int verifyPlateInFile(char *);

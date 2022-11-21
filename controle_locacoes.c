@@ -15,7 +15,9 @@ void menu_cadastrar_locacao()
 
     printf("=============================================\n");
     locacao = inputRentalValues();
+
     gravaArquivoLocacao(locacao);
+    
     printf("=============================================\n");
     printf(" Cadastro realizado com sucesso! \n");
 }

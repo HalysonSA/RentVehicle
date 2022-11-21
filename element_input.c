@@ -79,6 +79,40 @@ int onlyTextInput(char *text)
     }
 }
 
+int verifyPlateInFile(char *placa)
+{
+    Veiculo *veiculo = (Veiculo *)malloc(sizeof(Veiculo));
+    FILE *fp = fopen("veiculos.dat", "rb");
+
+    if (access("veiculos.dat", F_OK) != -1)
+    {
+        if (fp == NULL)
+        {
+            printf("Ocorreu um erro na abertura do arquivo!\n");
+            exit(1);
+        }
+
+        while (!feof(fp))
+        {
+            fread(veiculo, sizeof(Veiculo), 1, fp);
+
+            placa[strcspn(placa, "\n")] = 0;
+            veiculo->placa[strcspn(veiculo->placa, "\n")] = 0;
+
+            if (!strcmp(veiculo->placa, placa))
+            {
+                printf("Veiculo ja cadastrado! digite outra placa \n");
+                return 1;
+            }
+        }
+        return 0;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 Veiculo *inputVehicleValues(void)
 {
     Veiculo *veiculo = (Veiculo *)malloc(sizeof(Veiculo));
@@ -113,7 +147,7 @@ Veiculo *inputVehicleValues(void)
         printf("Digite a placa do veiculo:  \n");
         scanf("%s", placa);
         getchar();
-    } while (carPlateValidation(placa) == False2);
+    } while (carPlateValidation(placa) == False2 || verifyPlateInFile(placa) == 1);
 
     do
     {
@@ -592,13 +626,13 @@ Locacao *inputRentalValues(void)
         printf("Digite o CPF do cliente: \n");
         fgets(cpf, sizeof cpf, stdin);
 
-    } while (CPFValidation(cpf) == 0);
+    } while (CPFValidation(cpf) == False2 || verifyCPFInFile(cpf) == 0);
 
     do
     {
         printf("Digite a placa do veiculo: \n");
         fgets(placa, sizeof placa, stdin);
-    } while (carPlateValidation(placa) == 0);
+    } while (carPlateValidation(placa) == False2 || verifyPlateInFile(placa) == 0);
 
     do
     {

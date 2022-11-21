@@ -64,9 +64,7 @@ Veiculo *buscaVeiculo(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        getchar();
-
-        exit(1);
+        controle_veiculos();
     }
     while (!feof(fp))
     {
@@ -103,9 +101,7 @@ Locacao *buscaLocacao(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        getchar();
-
-        exit(1);
+        controle_locacoes();
     }
     while (!feof(fp))
     {
@@ -157,7 +153,7 @@ void listaVeiculos(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        exit(1);
+        controle_veiculos();
     }
 
     while (fread(veiculo, sizeof(Veiculo), 1, fp))
@@ -180,7 +176,7 @@ void listaLocacoes(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        exit(1);
+        controle_locacoes();
     }
     while (fread(locacao, sizeof(Locacao), 1, fp))
     {

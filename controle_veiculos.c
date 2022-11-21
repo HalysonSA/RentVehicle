@@ -16,8 +16,9 @@ void menu_cadastrar_veiculo()
 
     printf("=============================================\n");
     veiculo = inputVehicleValues();
+    
     gravaArquivoVeiculo(veiculo);
-    printf("=============================================\n");
+
     printf(" Cadastro realizado com sucesso! \n");
     printf("=============================================\n");
 }
