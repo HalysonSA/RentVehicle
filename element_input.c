@@ -284,6 +284,7 @@ void updateClientValues(void)
     Cliente *aux_cliente = (Cliente *)malloc(sizeof(Cliente));
 
     int found = 0;
+    long int menos_um = -1;
 
     char nome[50];
     char telefone[20];
@@ -300,75 +301,110 @@ void updateClientValues(void)
         if (cliente->nome == NULL)
         {
             printf("Cliente nao existe");
-            exit(1);
         }
 
-        do
+        else if (cliente->status == 0)
         {
-            printf(" Digite o nome: \n");
-            fgets(nome, sizeof nome, stdin);
-
-        } while (onlyTextInput(nome) == False2);
-
-        do
-        {
-            printf(" Digite o telefone: \n");
-            fgets(telefone, sizeof telefone, stdin);
-        } while (onlyNumberInput(telefone) == False2);
-
-        do
-        {
-            printf(" Digite a rua: \n");
-            fgets(rua, sizeof rua, stdin);
-        } while (onlyTextInput(rua) == False2);
-
-        do
-        {
-            printf(" Digite o bairro: \n");
-            fgets(bairro, sizeof bairro, stdin);
-        } while (onlyTextInput(bairro) == False2);
-
-        do
-        {
-            printf(" Digite a cidade: \n");
-            fgets(cidade, sizeof cidade, stdin);
-        } while (onlyTextInput(cidade) == False2);
-
-        do
-        {
-            printf(" Digite o estado: \n");
-            fgets(estado, sizeof estado, stdin);
-        } while (onlyTextInput(estado) == False2);
-
-        strcpy(cliente->nome, nome);
-        strcpy(cliente->telefone, telefone);
-        strcpy(cliente->rua, rua);
-        strcpy(cliente->bairro, bairro);
-        strcpy(cliente->cidade, cidade);
-        strcpy(cliente->estado, estado);
-
-        long int menos_um = -1;
-
-        // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
-
-        while (!feof(file) && !found)
-        {
-            fread(aux_cliente, sizeof(Cliente), 1, file);
-
-            if (strcmp(aux_cliente->cpf, cliente->cpf) == 0)
+            printf("Cliente inativo, deseja reativar? (s/n) \n");
+            char opcao;
+            scanf("%c", &opcao);
+            getchar();
+            if (opcao == 's')
             {
-                found = 1;
 
-                fseek(file, (menos_um) * sizeof(Cliente), SEEK_CUR);
+                cliente->status = 1;
 
-                fwrite(cliente, sizeof(Cliente), 1, file);
+                // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
+
+                while (!feof(file) && !found)
+                {
+                    fread(aux_cliente, sizeof(Cliente), 1, file);
+
+                    if (strcmp(aux_cliente->cpf, cliente->cpf) == 0)
+                    {
+                        found = 1;
+
+                        fseek(file, (menos_um) * sizeof(Cliente), SEEK_CUR);
+
+                        fwrite(cliente, sizeof(Cliente), 1, file);
+                    }
+                }
+                //////////////////////////////////
+
+                fclose(file);
+                free(cliente);
+                free(aux_cliente);
+
+                printf("Cliente reativado com sucesso! \n");
             }
         }
-        //////////////////////////////////
+        else
+        {
+            do
+            {
+                printf(" Digite o nome: \n");
+                fgets(nome, sizeof nome, stdin);
 
-        fclose(file);
-        free(cliente);
-        free(aux_cliente);
+            } while (onlyTextInput(nome) == False2);
+
+            do
+            {
+                printf(" Digite o telefone: \n");
+                fgets(telefone, sizeof telefone, stdin);
+            } while (onlyNumberInput(telefone) == False2);
+
+            do
+            {
+                printf(" Digite a rua: \n");
+                fgets(rua, sizeof rua, stdin);
+            } while (onlyTextInput(rua) == False2);
+
+            do
+            {
+                printf(" Digite o bairro: \n");
+                fgets(bairro, sizeof bairro, stdin);
+            } while (onlyTextInput(bairro) == False2);
+
+            do
+            {
+                printf(" Digite a cidade: \n");
+                fgets(cidade, sizeof cidade, stdin);
+            } while (onlyTextInput(cidade) == False2);
+
+            do
+            {
+                printf(" Digite o estado: \n");
+                fgets(estado, sizeof estado, stdin);
+            } while (onlyTextInput(estado) == False2);
+
+            strcpy(cliente->nome, nome);
+            strcpy(cliente->telefone, telefone);
+            strcpy(cliente->rua, rua);
+            strcpy(cliente->bairro, bairro);
+            strcpy(cliente->cidade, cidade);
+            strcpy(cliente->estado, estado);
+
+            // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
+
+            while (!feof(file) && !found)
+            {
+                fread(aux_cliente, sizeof(Cliente), 1, file);
+
+                if (strcmp(aux_cliente->cpf, cliente->cpf) == 0)
+                {
+                    found = 1;
+
+                    fseek(file, (menos_um) * sizeof(Cliente), SEEK_CUR);
+
+                    fwrite(cliente, sizeof(Cliente), 1, file);
+                }
+            }
+            //////////////////////////////////
+
+            fclose(file);
+            free(cliente);
+            free(aux_cliente);
+        }
     }
     else
     {
@@ -427,6 +463,8 @@ void updateVehicleValues(void)
     Veiculo *aux_veiculo = (Veiculo *)malloc(sizeof(Veiculo));
 
     int found = 0;
+    long int menos_um = -1;
+
     char modelo[30];
     char marca[30];
     char ano[10];
@@ -438,14 +476,43 @@ void updateVehicleValues(void)
     if (file)
     {
 
-        if (veiculo->modelo == NULL)
+        if (!veiculo)
         {
-            printf("Veiculo nao existe");
-            exit(1);
+            printf("Veiculo nao existe \n");
+        }
+        else if (veiculo->status == 0)
+        {
+            printf("Veiculo inativo, deseja reativar? (s/n) \n");
+            char opcao;
+            scanf("%c", &opcao);
+            getchar();
+
+            if (opcao == 's')
+            {
+                veiculo->status = 1;
+
+                while (!feof(file) && !found)
+                {
+                    fread(aux_veiculo, sizeof(Veiculo), 1, file);
+
+                    if (strcmp(aux_veiculo->placa, veiculo->placa) == 0)
+                    {
+                        found = 1;
+
+                        fseek(file, menos_um * sizeof(Veiculo), SEEK_CUR);
+                        fwrite(veiculo, sizeof(Veiculo), 1, file);
+                    }
+                }
+
+                fclose(file);
+                free(veiculo);
+                free(aux_veiculo);
+
+                printf("Veiculo reativado com sucesso! \n");
+            }
         }
         else
         {
-
             do
             {
                 printf(" Digite a marca: \n");
@@ -483,8 +550,6 @@ void updateVehicleValues(void)
             strcpy(veiculo->ano, ano);
             strcpy(veiculo->valor, valor);
             strcpy(veiculo->cor, cor);
-
-            long int menos_um = -1;
 
             while (!feof(file) && !found)
             {

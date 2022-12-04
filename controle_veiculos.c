@@ -35,6 +35,10 @@ void menu_relatorio_veiculo(Veiculo *veiculo)
         printf("Cor do veiculo: %s \n", veiculo->cor);
         printf("Valor do veiculo: %s \n", veiculo->valor);
     }
+    else if (veiculo[0].status == 0)
+    {
+        printf("Veiculo inativo \n");
+    }
     else
     {
         printf("Nenhum Veiculo cadastrado! \n");
