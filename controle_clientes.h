@@ -2,7 +2,10 @@ typedef struct
 {
     char nome[50];
     char cpf[15];
-    char endereco[100];
+    char rua[50];
+    char bairro[50];
+    char cidade[50];
+    char estado[50];
     char telefone[15];
     char status;
 } Cliente;

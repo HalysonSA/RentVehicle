@@ -26,10 +26,17 @@ void menu_relatorio_cliente(Cliente *cliente)
 
     if (cliente[0].nome != NULL && cliente[0].status == 1)
     {
-        printf("Nome do cliente: %s \n", cliente->nome);
-        printf("CPF do cliente: %s \n", cliente->cpf);
-        printf("Endereco do cliente: %s \n", cliente->endereco);
-        printf("Telefone do cliente: %s \n", cliente->telefone);
+        printf("Nome: %s \n", cliente->nome);
+        printf("CPF: %s \n", cliente->cpf);
+        printf("Telefone %s \n", cliente->telefone);
+        printf("Rua: %s \n", cliente->rua);
+        printf("Bairro: %s \n", cliente->bairro);
+        printf("Cidade: %s \n", cliente->cidade);
+        printf("Estado: %s \n", cliente->estado);
+    }
+    else if (cliente[0].status == 0)
+    {
+        printf("Cliente inativo \n");
     }
     else
     {

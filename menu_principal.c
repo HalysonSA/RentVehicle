@@ -12,7 +12,6 @@ char menu_principal()
     printf("======    1 - Controle de locacoes      ======\n");
     printf("======    2 - Controle de clientes      ======\n");
     printf("======    3 - Controle de veiculos      ======\n");
-    printf("======    4 - Controle do financeiro    ======\n");
     printf("======    0 - Encerrar Programa         ======\n");
     printf("==============================================\n");
 

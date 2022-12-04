@@ -215,7 +215,10 @@ Cliente *inputClientValues(void)
     char nome[50];
     char cpf[15];
     char telefone[15];
-    char endereco[50];
+    char rua[50];
+    char bairro[50];
+    char cidade[50];
+    char estado[50];
 
     do
     {
@@ -233,20 +236,42 @@ Cliente *inputClientValues(void)
 
     do
     {
-        printf(" Digite o endereco: \n");
-        fgets(endereco, sizeof endereco, stdin);
-    } while (onlyNumberAndTextInput(endereco) == False2);
-
-    do
-    {
         printf(" Digite o telefone: \n");
         fgets(telefone, sizeof telefone, stdin);
     } while (onlyNumberInput(telefone) == False2);
 
+    do
+    {
+        printf(" Digite a rua: \n");
+        fgets(rua, sizeof rua, stdin);
+    } while (onlyTextInput(rua) == False2);
+
+    do
+    {
+        printf(" Digite o bairro: \n");
+        fgets(bairro, sizeof bairro, stdin);
+    } while (onlyTextInput(bairro) == False2);
+
+    do
+    {
+        printf(" Digite a cidade: \n");
+        fgets(cidade, sizeof cidade, stdin);
+    } while (onlyTextInput(cidade) == False2);
+
+    do
+    {
+        printf(" Digite o estado: \n");
+        fgets(estado, sizeof estado, stdin);
+    } while (onlyTextInput(estado) == False2);
+
     strcpy(cliente->nome, nome);
     strcpy(cliente->cpf, cpf);
-    strcpy(cliente->endereco, endereco);
     strcpy(cliente->telefone, telefone);
+    strcpy(cliente->rua, rua);
+    strcpy(cliente->bairro, bairro);
+    strcpy(cliente->cidade, cidade);
+    strcpy(cliente->estado, estado);
+
     cliente->status = 1;
 
     return cliente;
@@ -262,7 +287,10 @@ void updateClientValues(void)
 
     char nome[50];
     char telefone[20];
-    char endereco[50];
+    char rua[50];
+    char bairro[50];
+    char cidade[50];
+    char estado[50];
 
     cliente = buscaCliente();
 
@@ -284,19 +312,40 @@ void updateClientValues(void)
 
         do
         {
-            printf(" Digite o endereco: \n");
-            fgets(endereco, sizeof endereco, stdin);
-        } while (onlyNumberAndTextInput(endereco) == False2);
-
-        do
-        {
             printf(" Digite o telefone: \n");
             fgets(telefone, sizeof telefone, stdin);
         } while (onlyNumberInput(telefone) == False2);
 
+        do
+        {
+            printf(" Digite a rua: \n");
+            fgets(rua, sizeof rua, stdin);
+        } while (onlyTextInput(rua) == False2);
+
+        do
+        {
+            printf(" Digite o bairro: \n");
+            fgets(bairro, sizeof bairro, stdin);
+        } while (onlyTextInput(bairro) == False2);
+
+        do
+        {
+            printf(" Digite a cidade: \n");
+            fgets(cidade, sizeof cidade, stdin);
+        } while (onlyTextInput(cidade) == False2);
+
+        do
+        {
+            printf(" Digite o estado: \n");
+            fgets(estado, sizeof estado, stdin);
+        } while (onlyTextInput(estado) == False2);
+
         strcpy(cliente->nome, nome);
-        strcpy(cliente->endereco, endereco);
         strcpy(cliente->telefone, telefone);
+        strcpy(cliente->rua, rua);
+        strcpy(cliente->bairro, bairro);
+        strcpy(cliente->cidade, cidade);
+        strcpy(cliente->estado, estado);
 
         long int menos_um = -1;
 

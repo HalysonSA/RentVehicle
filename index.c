@@ -13,7 +13,6 @@
 #include "controle_clientes.h"
 #include "controle_veiculos.h"
 #include "controle_locacoes.h"
-#include "controle_financeiro.h"
 
 int main()
 {
@@ -36,11 +35,6 @@ int main()
         else if (choice == '3')
         {
             controle_veiculos();
-        }
-
-        else if (choice == '4')
-        {
-            controle_financeiro();
         }
 
         else
