@@ -9,3 +9,4 @@ void gravaArquivoLocacao(Locacao *);
 void listaClientes(void);
 void listaVeiculos(void);
 void listaLocacoes(void);
+void listaClientesPorCidade(void);

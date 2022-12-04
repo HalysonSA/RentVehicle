@@ -298,7 +298,7 @@ void updateClientValues(void)
     if (file)
     {
 
-        if (cliente->nome == NULL)
+        if (!cliente)
         {
             printf("Cliente nao existe");
         }
@@ -637,47 +637,49 @@ void updateRentalValues(void)
         if (locacao->cliente == NULL)
         {
             printf("Cliente nao existe");
-            exit(1);
         }
-
-        do
+        else
         {
-            printf(" Digite a data de locacao: \n");
-            fgets(data_locacao, sizeof data_locacao, stdin);
 
-        } while (onlyNumberInput(data_locacao) == 0);
-
-        do
-        {
-            printf(" Digite a data de devolucao: \n");
-            fgets(data_devolucao, sizeof data_devolucao, stdin);
-        } while (onlyNumberInput(data_devolucao) == 0);
-
-        strcpy(locacao->data_locacao, data_locacao);
-        strcpy(locacao->data_devolucao, data_devolucao);
-
-        long int menos_um = -1;
-
-        // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
-
-        while (!feof(file) && !found)
-        {
-            fread(aux_locacao, sizeof(Locacao), 1, file);
-
-            if (strcmp(aux_locacao->cliente, locacao->cliente) == 0)
+            do
             {
-                found = 1;
+                printf(" Digite a data de locacao: \n");
+                fgets(data_locacao, sizeof data_locacao, stdin);
 
-                fseek(file, (menos_um) * sizeof(Locacao), SEEK_CUR);
+            } while (onlyNumberInput(data_locacao) == 0);
 
-                fwrite(locacao, sizeof(Locacao), 1, file);
+            do
+            {
+                printf(" Digite a data de devolucao: \n");
+                fgets(data_devolucao, sizeof data_devolucao, stdin);
+            } while (onlyNumberInput(data_devolucao) == 0);
+
+            strcpy(locacao->data_locacao, data_locacao);
+            strcpy(locacao->data_devolucao, data_devolucao);
+
+            long int menos_um = -1;
+
+            // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
+
+            while (!feof(file) && !found)
+            {
+                fread(aux_locacao, sizeof(Locacao), 1, file);
+
+                if (strcmp(aux_locacao->cliente, locacao->cliente) == 0)
+                {
+                    found = 1;
+
+                    fseek(file, (menos_um) * sizeof(Locacao), SEEK_CUR);
+
+                    fwrite(locacao, sizeof(Locacao), 1, file);
+                }
             }
-        }
-        //////////////////////////////////
+            //////////////////////////////////
 
-        fclose(file);
-        free(locacao);
-        free(aux_locacao);
+            fclose(file);
+            free(locacao);
+            free(aux_locacao);
+        }
     }
     else
     {

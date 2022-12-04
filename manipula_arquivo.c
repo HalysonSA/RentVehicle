@@ -141,6 +141,72 @@ void listaClientes(void)
     free(cliente);
 }
 
+void listaClientesPorCidade(void)
+{
+    FILE *fp;
+    Cliente *cliente;
+
+    cliente = (Cliente *)malloc(sizeof(Cliente));
+
+    char cidade[50];
+
+    printf("Cidade dos clientes: ");
+    fgets(cidade, sizeof cidade, stdin);
+
+    fp = fopen("clientes.dat", "rb");
+    if (fp == NULL)
+    {
+        printf("Ocorreu um erro na abertura do arquivo!\n");
+        controle_clientes();
+    }
+    int len = strlen(cidade);
+    int posicao = 0;
+    int espaco = 0;
+
+    // https://pt.stackoverflow.com/questions/127177/como-retirar-espa%C3%A7os-de-uma-string-em-c#:~:text=O%20segredo%20%C3%A9%20varrer%20a,%2C%20caso%20contr%C3%A1rio%2C%20ser%C3%A1%20ignorado.
+
+    for (int i = 0; i < len; i++)
+    {
+        if (cliente->cidade[i] == ' ')
+        {
+            espaco = 1;
+        }
+    }
+
+    while (fread(cliente, sizeof(Cliente), 1, fp))
+    {
+
+        if (espaco == 1)
+        {
+            for (int i = 0; i < len; i++)
+            {
+                if (!(cidade[i] == ' ') || !(cliente->cidade[i] == ' '))
+                {
+                    cidade[posicao] = cidade[i];
+                    cliente->cidade[posicao] = cliente->cidade[i];
+
+                    posicao++;
+                }
+            }
+        }
+        size_t ln = strlen(cidade) - 1;
+
+        if (cidade[ln] == '\n')
+        {
+            cidade[ln] = '\0';
+            continue;
+        }
+
+        if (!strcmp(cliente->cidade, cidade))
+        {
+
+            menu_relatorio_cliente(cliente);
+        }
+    }
+    fclose(fp);
+    free(cliente);
+}
+
 void listaVeiculos(void)
 {
     FILE *fp;
