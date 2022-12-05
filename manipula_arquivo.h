@@ -10,3 +10,4 @@ void listaClientes(void);
 void listaVeiculos(void);
 void listaLocacoes(void);
 void listaClientesPorCidade(void);
+void listaVeiculosPorMarca(void);

@@ -66,10 +66,11 @@ char menu_veiculos(void)
     printf("=============================================\n");
     printf("======     CONTROLE DE VEICULOS      ========\n");
     printf("======    1 - Cadastrar veiculo      ========\n");
-    printf("======    2 - Relatorio veiculos     ========\n");
-    printf("======    3 - Editar veiculo         ========\n");
-    printf("======    4 - Remover veiculo        ========\n");
-    printf("======    5 - Buscar veiculo         ========\n");
+    printf("======    2 - Editar veiculo         ========\n");
+    printf("======    3 - Remover veiculo        ========\n");
+    printf("======    4 - Buscar veiculo         ========\n");
+    printf("======    5 - Relatorio veiculos     ========\n");
+    printf("======    6 - Relatorio por marca    ========\n");
     printf("======    0 - Voltar ao menu         ========\n");
     printf("=============================================\n");
 
@@ -95,26 +96,26 @@ void controle_veiculos()
             system("cls||clear");
             menu_cadastrar_veiculo();
             break;
-        case '2':
+        case '5':
             system("cls||clear");
             printf("=============================================\n");
             printf("====  Relatorio de veiculos cadastrados  ====\n");
             printf("=============================================\n");
             listaVeiculos();
             break;
-        case '3':
+        case '2':
         {
             system("cls||clear");
             menu_editar_veiculo();
         }
         break;
-        case '4':
+        case '3':
 
             system("cls||clear");
             menu_remover_veiculo();
             break;
 
-        case '5':
+        case '4':
             system("cls||clear");
             Veiculo *veiculo = (Veiculo *)malloc(sizeof(Veiculo));
             veiculo = buscaVeiculo();
@@ -128,6 +129,15 @@ void controle_veiculos()
                 printf("Veiculo nao encontrado! \n");
             }
             printf("=============================================\n");
+            break;
+
+        case '6':
+            system("cls||clear");
+            printf("=============================================\n");
+            printf("====  Relatorio de veiculos por marca    ====\n");
+            printf("=============================================\n");
+
+            listaVeiculosPorMarca();
             break;
         default:
             printf("Opcao invalida\n");

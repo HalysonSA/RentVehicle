@@ -175,7 +175,6 @@ void listaClientesPorCidade(void)
 
     while (fread(cliente, sizeof(Cliente), 1, fp))
     {
-
         if (espaco == 1)
         {
             for (int i = 0; i < len; i++)
@@ -189,6 +188,7 @@ void listaClientesPorCidade(void)
                 }
             }
         }
+
         size_t ln = strlen(cidade) - 1;
 
         if (cidade[ln] == '\n')
@@ -199,7 +199,6 @@ void listaClientesPorCidade(void)
 
         if (!strcmp(cliente->cidade, cidade))
         {
-
             menu_relatorio_cliente(cliente);
         }
     }
@@ -227,6 +226,76 @@ void listaVeiculos(void)
         menu_relatorio_veiculo(veiculo);
     }
     fclose(fp);
+    free(veiculo);
+}
+
+void listaVeiculosPorMarca(void)
+{
+    FILE *fp;
+    Veiculo *veiculo;
+
+    veiculo = (Veiculo *)malloc(sizeof(Veiculo));
+
+    char marca[50];
+
+    printf("Marca dos veiculos: ");
+    fgets(marca, sizeof marca, stdin);
+
+    fp = fopen("veiculos.dat", "rb");
+
+    if (fp == NULL)
+    {
+        printf("Ocorreu um erro na abertura do arquivo!\n");
+        controle_veiculos();
+    }
+
+    int len = strlen(marca);
+    int posicao = 0;
+    int espaco = 0;
+
+    // https://pt.stackoverflow.com/questions/127177/como-retirar-espa%C3%A7os-de-uma-string-em-c#:~:text=O%20segredo%20%C3%A9%20varrer%20a,%2C%20caso%20contr%C3%A1rio%2C%20ser%C3%A1%20ignorado.
+
+    for (int i = 0; i < len; i++)
+    {
+        if (veiculo->marca[i] == ' ')
+        {
+            espaco = 1;
+        }
+    }
+
+    //////
+
+    while (fread(veiculo, sizeof(Veiculo), 1, fp))
+    {
+
+        if (espaco == 1)
+        {
+
+            for (int i = 0; i < len; i++)
+            {
+                if (!(marca[i] == ' ') || !(veiculo->marca[i] == ' '))
+                {
+                    marca[posicao] = marca[i];
+                    veiculo->marca[posicao] = veiculo->marca[i];
+
+                    posicao++;
+                }
+            }
+        }
+
+        size_t ln = len - 1;
+
+        if (marca[ln] == '\n')
+        {
+            marca[ln] = '\0';
+            continue;
+        }
+
+        if (!strcmp(veiculo->marca, marca))
+        {
+            menu_relatorio_veiculo(veiculo);
+        }
+    };
     free(veiculo);
 }
 
