@@ -13,17 +13,30 @@
 const int True2 = 1;
 const int False2 = 0;
 
-int onlyNumberAndTextInput(char *text)
+int retiraQuebraLinha(char *text)
 {
-    if (strpbrk(text, "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\x0b\x0c") == NULL)
+    size_t ln = strlen(text) - 1;
+
+    if (text[ln] == '\n' && strlen(text) > 1)
+    {
+        text[ln] = '\0';
+        return 1;
+    }
+    else
     {
 
-        size_t ln = strlen(text) - 1;
+        return 0;
+    }
+}
 
-        if (text[ln] == '\n')
-        {
-            text[ln] = '\0';
-        }
+int onlyNumberAndTextInput(char *text)
+{
+
+    int testaQuebra = retiraQuebraLinha(text);
+
+    if (testaQuebra)
+    {
+
         system("cls||clear");
         return True2;
     }
@@ -37,37 +50,48 @@ int onlyNumberAndTextInput(char *text)
 
 int onlyNumberInput(char *text)
 {
-    if (strpbrk(text, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\x0b\x0c") == NULL)
+    int testaQuebra = retiraQuebraLinha(text);
+
+    // https://www.geeksforgeeks.org/isalpha-isdigit-functions-c-example/
+    int alphabet = 0; // counter for alphabet characters
+
+    for (int i = 0; i < strlen(text); i++)
     {
 
-        size_t ln = strlen(text) - 1;
+        if (isalpha(text[i]) != 0)
+            alphabet++;
+    }
 
-        if (text[ln] == '\n')
-        {
-            text[ln] = '\0';
-        }
+    if ((alphabet == 0) && testaQuebra)
+    {
         system("cls||clear");
         return True2;
     }
     else
     {
         system("cls||clear");
-        printf("Digite apenas Números \n");
+        printf("Digite apenas Numeros \n");
         return False2;
     }
 }
 
 int onlyTextInput(char *text)
 {
-    if (strpbrk(text, "0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~\x0b\x0c") == NULL)
+    int testaQuebra = retiraQuebraLinha(text);
+
+    // https://www.geeksforgeeks.org/isalpha-isdigit-functions-c-example/
+    int number = 0; // counter for alphabet characters
+
+    for (int i = 0; i < strlen(text); i++)
     {
 
-        size_t ln = strlen(text) - 1;
+        if (isdigit(text[i]) != 0)
+            number++;
+    }
 
-        if (text[ln] == '\n')
-        {
-            text[ln] = '\0';
-        }
+    if ((number == 0) && testaQuebra)
+    {
+
         system("cls||clear");
         return True2;
     }
@@ -101,11 +125,10 @@ int verifyPlateInFile(char *placa)
 
             if (!strcmp(veiculo->placa, placa))
             {
-                printf("Veiculo existe! \n");
+                printf("Veiculo já existe! \n");
                 return 1;
             }
         }
-        printf("Veiculo inexistente \n");
         return 0;
     }
     else
@@ -129,13 +152,14 @@ Veiculo *inputVehicleValues(void)
     {
         printf("Digite o modelo do veiculo:  \n");
         fgets(modelo, sizeof modelo, stdin);
+
     } while (onlyTextInput(modelo) == False2);
 
     do
     {
         printf("Digite a marca do veiculo:  \n");
         fgets(marca, sizeof marca, stdin);
-    } while (onlyNumberAndTextInput(marca) == False2);
+    } while (onlyTextInput(marca) == False2);
 
     do
     {
@@ -195,11 +219,10 @@ int verifyCPFInFile(char *cpf)
 
             if (!strcmp(cliente->cpf, cpf))
             {
-                printf("Cliente existe! \n");
+                printf("Cliente ja existe! \n");
                 return 1;
             }
         }
-        printf("Cliente inexistente! \n");
         return 0;
     }
     else
@@ -238,30 +261,35 @@ Cliente *inputClientValues(void)
     {
         printf(" Digite o telefone: \n");
         fgets(telefone, sizeof telefone, stdin);
+
     } while (onlyNumberInput(telefone) == False2);
 
     do
     {
         printf(" Digite a rua: \n");
         fgets(rua, sizeof rua, stdin);
+
     } while (onlyTextInput(rua) == False2);
 
     do
     {
         printf(" Digite o bairro: \n");
         fgets(bairro, sizeof bairro, stdin);
+
     } while (onlyTextInput(bairro) == False2);
 
     do
     {
         printf(" Digite a cidade: \n");
         fgets(cidade, sizeof cidade, stdin);
+
     } while (onlyTextInput(cidade) == False2);
 
     do
     {
         printf(" Digite o estado: \n");
         fgets(estado, sizeof estado, stdin);
+
     } while (onlyTextInput(estado) == False2);
 
     strcpy(cliente->nome, nome);

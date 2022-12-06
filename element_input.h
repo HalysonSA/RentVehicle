@@ -17,3 +17,5 @@ void deleteRentalValues(void);
 
 int verifyCPFInFile(char *);
 int verifyPlateInFile(char *);
+
+int retiraQuebraLinha(char *);

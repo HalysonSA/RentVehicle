@@ -144,9 +144,7 @@ void listaClientes(void)
 void listaClientesPorCidade(void)
 {
     FILE *fp;
-    Cliente *cliente;
-
-    cliente = (Cliente *)malloc(sizeof(Cliente));
+    Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
 
     char cidade[50];
 
@@ -154,56 +152,29 @@ void listaClientesPorCidade(void)
     fgets(cidade, sizeof cidade, stdin);
 
     fp = fopen("clientes.dat", "rb");
+
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
         controle_clientes();
     }
-    int len = strlen(cidade);
-    int posicao = 0;
-    int espaco = 0;
-
-    // https://pt.stackoverflow.com/questions/127177/como-retirar-espa%C3%A7os-de-uma-string-em-c#:~:text=O%20segredo%20%C3%A9%20varrer%20a,%2C%20caso%20contr%C3%A1rio%2C%20ser%C3%A1%20ignorado.
-
-    for (int i = 0; i < len; i++)
-    {
-        if (cliente->cidade[i] == ' ')
-        {
-            espaco = 1;
-        }
-    }
 
     while (fread(cliente, sizeof(Cliente), 1, fp))
     {
-        if (espaco == 1)
-        {
-            for (int i = 0; i < len; i++)
-            {
-                if (!(cidade[i] == ' ') || !(cliente->cidade[i] == ' '))
-                {
-                    cidade[posicao] = cidade[i];
-                    cliente->cidade[posicao] = cliente->cidade[i];
-
-                    posicao++;
-                }
-            }
-        }
-
         size_t ln = strlen(cidade) - 1;
 
         if (cidade[ln] == '\n')
         {
             cidade[ln] = '\0';
-            continue;
         }
-
         if (!strcmp(cliente->cidade, cidade))
         {
             menu_relatorio_cliente(cliente);
         }
     }
-    fclose(fp);
+
     free(cliente);
+    fclose(fp);
 }
 
 void listaVeiculos(void)
@@ -232,11 +203,9 @@ void listaVeiculos(void)
 void listaVeiculosPorMarca(void)
 {
     FILE *fp;
-    Veiculo *veiculo;
+    Veiculo *veiculo = (Veiculo *)malloc(sizeof(Veiculo));
 
-    veiculo = (Veiculo *)malloc(sizeof(Veiculo));
-
-    char marca[50];
+    char marca[30];
 
     printf("Marca dos veiculos: ");
     fgets(marca, sizeof marca, stdin);
@@ -249,54 +218,22 @@ void listaVeiculosPorMarca(void)
         controle_veiculos();
     }
 
-    int len = strlen(marca);
-    int posicao = 0;
-    int espaco = 0;
-
-    // https://pt.stackoverflow.com/questions/127177/como-retirar-espa%C3%A7os-de-uma-string-em-c#:~:text=O%20segredo%20%C3%A9%20varrer%20a,%2C%20caso%20contr%C3%A1rio%2C%20ser%C3%A1%20ignorado.
-
-    for (int i = 0; i < len; i++)
-    {
-        if (veiculo->marca[i] == ' ')
-        {
-            espaco = 1;
-        }
-    }
-
-    //////
-
     while (fread(veiculo, sizeof(Veiculo), 1, fp))
     {
-
-        if (espaco == 1)
-        {
-
-            for (int i = 0; i < len; i++)
-            {
-                if (!(marca[i] == ' ') || !(veiculo->marca[i] == ' '))
-                {
-                    marca[posicao] = marca[i];
-                    veiculo->marca[posicao] = veiculo->marca[i];
-
-                    posicao++;
-                }
-            }
-        }
-
-        size_t ln = len - 1;
+        size_t ln = strlen(marca) - 1;
 
         if (marca[ln] == '\n')
         {
             marca[ln] = '\0';
-            continue;
         }
-
         if (!strcmp(veiculo->marca, marca))
         {
             menu_relatorio_veiculo(veiculo);
         }
-    };
+    }
+
     free(veiculo);
+    fclose(fp);
 }
 
 void listaLocacoes(void)
