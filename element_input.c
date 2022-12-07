@@ -17,14 +17,18 @@ int retiraQuebraLinha(char *text)
 {
     size_t ln = strlen(text) - 1;
 
-    if (text[ln] == '\n' && strlen(text) > 1)
+    if (text[ln] == '\n' && ln > 0)
     {
         text[ln] = '\0';
         return 1;
     }
+    else if (
+        text[ln] != '\n' && ln > 0)
+    {
+        return 1;
+    }
     else
     {
-
         return 0;
     }
 }
@@ -125,7 +129,6 @@ int verifyPlateInFile(char *placa)
 
             if (!strcmp(veiculo->placa, placa))
             {
-                printf("Veiculo já existe! \n");
                 return 1;
             }
         }
@@ -172,6 +175,14 @@ Veiculo *inputVehicleValues(void)
         printf("Digite a placa do veiculo:  \n");
         scanf("%s", placa);
         getchar();
+
+        if (verifyPlateInFile(placa) == 1)
+        {
+            system("cls||clear");
+            printf("Placa já cadastrada! \n");
+            system("pause");
+        }
+
     } while (carPlateValidation(placa) == False2 || verifyPlateInFile(placa) == 1);
 
     do
@@ -219,7 +230,6 @@ int verifyCPFInFile(char *cpf)
 
             if (!strcmp(cliente->cpf, cpf))
             {
-                printf("Cliente ja existe! \n");
                 return 1;
             }
         }
@@ -254,6 +264,13 @@ Cliente *inputClientValues(void)
     {
         printf(" Digite o CPF: \n");
         fgets(cpf, sizeof cpf, stdin);
+
+        if (CPFValidation(cpf) == False2 || verifyCPFInFile(cpf) == 1)
+        {
+            system("cls||clear");
+            printf("CPF invalido ou ja cadastrado! \n");
+            system("pause");
+        }
 
     } while (CPFValidation(cpf) == False2 || verifyCPFInFile(cpf) == 1);
 
@@ -772,19 +789,34 @@ Locacao *inputRentalValues(void)
         printf("Digite o CPF do cliente: \n");
         fgets(cliente, sizeof cliente, stdin);
 
+        if (verifyCPFInFile(cliente) == 0)
+        {
+            system("cls||clear");
+            printf("CPF invalido ou nao cadastrado\n");
+            system("pause");
+        }
+
     } while (CPFValidation(cliente) == False2 || verifyCPFInFile(cliente) == 0);
 
     do
     {
         printf("Digite a placa do veiculo: \n");
         fgets(placa, sizeof placa, stdin);
+        if (verifyPlateInFile(placa) == 0)
+        {
+            system("cls||clear");
+            printf("Placa invalida ou nao cadastrada\n");
+            system("pause");
+        }
+
     } while (carPlateValidation(placa) == False2 || verifyPlateInFile(placa) == 0);
 
     do
     {
-        printf("Data da locacao: \n");
+
+        printf("Data da locacao ( DD/MM/AAAA ): \n");
         fgets(data, sizeof data, stdin);
-    } while (onlyNumberAndTextInput(data) == 0);
+    } while (onlyNumberAndTextInput(data) == 0 || DateValidation(data) == 0);
 
     do
     {

@@ -32,9 +32,13 @@ void menu_relatorio_locacao(Locacao *locacao)
         printf("Data de fim da locacao: %s \n", locacao->data_devolucao);
         printf("Valor da locacao: %s \n", locacao->valor);
     }
+    else if (locacao[0].status == 0)
+    {
+        printf("Locacao removida ou inativa \n");
+    }
     else
     {
-        printf("Nenhuma locacao cadastrada! \n");
+        printf("Nenhuma locacao encontrada! \n");
     }
 
     printf("=============================================\n");
@@ -86,10 +90,11 @@ void controle_locacoes()
         switch (choice)
         {
         case '1':
+            system("cls||clear");
             menu_cadastrar_locacao();
             break;
         case '2':
-
+            system("cls||clear");
             printf("=============================================\n");
             printf("====  Relatorio de Locacoes cadastradas  ====\n");
             printf("=============================================\n");
@@ -102,6 +107,7 @@ void controle_locacoes()
 
             break;
         case '4':
+            system("cls||clear");
             menu_remover_locacao();
             break;
 
