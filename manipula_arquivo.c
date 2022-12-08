@@ -25,6 +25,7 @@ Cliente *buscaCliente(void)
     } while (CPFValidation(cpf_cliente) == 0);
 
     fp = fopen("clientes.dat", "rb");
+
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
@@ -45,21 +46,23 @@ Cliente *buscaCliente(void)
 
 Veiculo *buscaVeiculo(void)
 {
-    FILE *fp = fopen("veiculos.dat", "rb");
+    FILE *fp;
+
     Veiculo *veiculo;
 
     veiculo = (Veiculo *)malloc(sizeof(Veiculo));
 
-    char placa[8];
+    char placa[10];
 
     do
     {
 
         printf("Informe a placa do veiculo: ");
-        scanf("%s", placa);
-        getchar();
+        fgets(placa, sizeof placa, stdin);
 
     } while (carPlateValidation(placa) == 0);
+
+    fp = fopen("veiculos.dat", "rb");
 
     if (fp == NULL)
     {

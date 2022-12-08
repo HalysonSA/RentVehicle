@@ -3,7 +3,7 @@ typedef struct
 {
     char modelo[30];
     char marca[30];
-    char ano[10];
+    char ano[15];
     char placa[10];
     char valor[50];
     char cor[20];

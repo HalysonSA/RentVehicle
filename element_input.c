@@ -147,7 +147,7 @@ Veiculo *inputVehicleValues(void)
     char placa[10];
     char modelo[20];
     char marca[20];
-    char ano[5];
+    char data[15];
     char cor[20];
     char valor[10];
 
@@ -166,15 +166,14 @@ Veiculo *inputVehicleValues(void)
 
     do
     {
-        printf("Digite o ano do veiculo:  \n");
-        fgets(ano, sizeof ano, stdin);
-    } while (onlyNumberInput(ano) == False2);
+        printf(" Digite a data de fabricacao do veiculo ( DD/MM/AAAA ): \n");
+        fgets(data, sizeof data, stdin);
+    } while (onlyNumberAndTextInput(data) == False2 || DateValidation(data) == False2);
 
     do
     {
         printf("Digite a placa do veiculo:  \n");
-        scanf("%s", placa);
-        getchar();
+        fgets(placa, sizeof placa, stdin);
 
         if (verifyPlateInFile(placa) == 1)
         {
@@ -199,7 +198,7 @@ Veiculo *inputVehicleValues(void)
 
     strcpy(veiculo->modelo, modelo);
     strcpy(veiculo->marca, marca);
-    strcpy(veiculo->ano, ano);
+    strcpy(veiculo->ano, data);
     strcpy(veiculo->placa, placa);
     strcpy(veiculo->valor, valor);
     strcpy(veiculo->cor, cor);
@@ -512,7 +511,7 @@ void updateVehicleValues(void)
 
     char modelo[30];
     char marca[30];
-    char ano[10];
+    char ano[12];
     char valor[50];
     char cor[20];
 
@@ -574,9 +573,9 @@ void updateVehicleValues(void)
 
             do
             {
-                printf(" Digite o ano: \n");
+                printf(" Digite a data de fabricacao do veiculo ( DD/MM/AAAA ): \n");
                 fgets(ano, sizeof ano, stdin);
-            } while (onlyNumberInput(ano) == False2);
+            } while (onlyNumberAndTextInput(ano) == False2 || DateValidation(ano) == False2);
 
             do
             {
@@ -604,7 +603,8 @@ void updateVehicleValues(void)
                 {
                     found = 1;
 
-                    fseek(file, menos_um * sizeof(Veiculo), SEEK_CUR);
+                    fseek(file, (menos_um) * sizeof(Veiculo), SEEK_CUR);
+
                     fwrite(veiculo, sizeof(Veiculo), 1, file);
                 }
             }
