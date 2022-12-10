@@ -178,8 +178,9 @@ Veiculo *inputVehicleValues(void)
         if (verifyPlateInFile(placa) == 1)
         {
             system("cls||clear");
-            printf("Placa já cadastrada! \n");
+            printf("Placa ja cadastrada! \n");
             system("pause");
+            return NULL;
         }
 
     } while (carPlateValidation(placa) == False2 || verifyPlateInFile(placa) == 1);
@@ -264,11 +265,12 @@ Cliente *inputClientValues(void)
         printf(" Digite o CPF: \n");
         fgets(cpf, sizeof cpf, stdin);
 
-        if (CPFValidation(cpf) == False2 || verifyCPFInFile(cpf) == 1)
+        if (verifyCPFInFile(cpf) == 1)
         {
             system("cls||clear");
-            printf("CPF invalido ou ja cadastrado! \n");
+            printf("CPF ja cadastrado! \n");
             system("pause");
+            return NULL;
         }
 
     } while (CPFValidation(cpf) == False2 || verifyCPFInFile(cpf) == 1);
@@ -344,7 +346,7 @@ void updateClientValues(void)
 
         if (!cliente)
         {
-            printf("Cliente nao existe");
+            printf("Cliente inexistente! \n");
         }
 
         else if (cliente->status == 0)
@@ -438,6 +440,8 @@ void updateClientValues(void)
                 {
                     found = 1;
 
+                    printf(" Cadastro atualizado com sucesso! \n");
+
                     fseek(file, (menos_um) * sizeof(Cliente), SEEK_CUR);
 
                     fwrite(cliente, sizeof(Cliente), 1, file);
@@ -466,37 +470,45 @@ void deleteClientValues(void)
 
     cliente = buscaCliente();
 
-    if (file)
+    if (cliente == NULL)
     {
-
-        cliente->status = 0;
-
-        long int menos_um = -1;
-
-        // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
-
-        while (!feof(file) && !found)
-        {
-            fread(aux_cliente, sizeof(Cliente), 1, file);
-
-            if (strcmp(aux_cliente->cpf, cliente->cpf) == 0)
-            {
-                found = 1;
-
-                fseek(file, (menos_um) * sizeof(Cliente), SEEK_CUR);
-
-                fwrite(cliente, sizeof(Cliente), 1, file);
-            }
-        }
-        //////////////////////////////////
-
-        fclose(file);
-        free(cliente);
-        free(aux_cliente);
+        printf("Cliente inexistente");
     }
     else
     {
-        printf("Erro ao abrir o arquivo");
+        if (file)
+        {
+
+            cliente->status = 0;
+
+            long int menos_um = -1;
+
+            // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
+
+            while (!feof(file) && !found)
+            {
+                fread(aux_cliente, sizeof(Cliente), 1, file);
+
+                if (strcmp(aux_cliente->cpf, cliente->cpf) == 0)
+                {
+                    found = 1;
+
+                    printf(" Cliente removido com sucesso! \n");
+                    fseek(file, (menos_um) * sizeof(Cliente), SEEK_CUR);
+
+                    fwrite(cliente, sizeof(Cliente), 1, file);
+                }
+            }
+            //////////////////////////////////
+
+            fclose(file);
+            free(cliente);
+            free(aux_cliente);
+        }
+        else
+        {
+            printf("Erro ao abrir o arquivo");
+        }
     }
 }
 
@@ -522,7 +534,7 @@ void updateVehicleValues(void)
 
         if (!veiculo)
         {
-            printf("Veiculo nao existe \n");
+            printf("Veiculo inexistente \n");
         }
         else if (veiculo->status == 0)
         {
@@ -603,6 +615,7 @@ void updateVehicleValues(void)
                 {
                     found = 1;
 
+                    printf(" Cadastro atualizado com sucesso! \n");
                     fseek(file, (menos_um) * sizeof(Veiculo), SEEK_CUR);
 
                     fwrite(veiculo, sizeof(Veiculo), 1, file);
@@ -629,37 +642,46 @@ void deleteVehicleValues(void)
     int found = 0;
 
     veiculo = buscaVeiculo();
-    if (file)
+    if (!veiculo)
     {
-
-        veiculo->status = 0;
-
-        long int menos_um = -1;
-
-        // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
-
-        while (!feof(file) && !found)
-        {
-            fread(aux_veiculo, sizeof(Veiculo), 1, file);
-
-            if (strcmp(aux_veiculo->placa, veiculo->placa) == 0)
-            {
-                found = 1;
-
-                fseek(file, (menos_um) * sizeof(Veiculo), SEEK_CUR);
-
-                fwrite(veiculo, sizeof(Veiculo), 1, file);
-            }
-        }
-        //////////////////////////////////
-
-        fclose(file);
-        free(veiculo);
-        free(aux_veiculo);
+        printf("Veiculo inexistente \n");
     }
     else
     {
-        printf("Erro ao abrir o arquivo");
+        if (file)
+        {
+
+            veiculo->status = 0;
+
+            long int menos_um = -1;
+
+            // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
+
+            while (!feof(file) && !found)
+            {
+                fread(aux_veiculo, sizeof(Veiculo), 1, file);
+
+                if (strcmp(aux_veiculo->placa, veiculo->placa) == 0)
+                {
+                    found = 1;
+
+                    printf(" Veiculo removido com sucesso! \n");
+
+                    fseek(file, (menos_um) * sizeof(Veiculo), SEEK_CUR);
+
+                    fwrite(veiculo, sizeof(Veiculo), 1, file);
+                }
+            }
+            //////////////////////////////////
+
+            fclose(file);
+            free(veiculo);
+            free(aux_veiculo);
+        }
+        else
+        {
+            printf("Erro ao abrir o arquivo");
+        }
     }
 }
 
@@ -676,28 +698,59 @@ void updateRentalValues(void)
 
     locacao = buscaLocacao();
 
-    if (file)
+    if (locacao == NULL)
+    {
+        printf("Locacao inexistente \n");
+    }
+    else if (locacao->status == 0)
+    {
+        printf("Locacao inativo, deseja reativar? (s/n) \n");
+        char opcao;
+        scanf("%c", &opcao);
+        getchar();
+
+        if (opcao == 's')
+        {
+            locacao->status = 1;
+            long int menos_um = -1;
+            while (!feof(file) && !found)
+            {
+                fread(aux_locacao, sizeof(Locacao), 1, file);
+
+                if (strcmp(aux_locacao->placa, locacao->placa) == 0)
+                {
+                    found = 1;
+
+                    fseek(file, menos_um * sizeof(Locacao), SEEK_CUR);
+                    fwrite(locacao, sizeof(Locacao), 1, file);
+                }
+            }
+
+            fclose(file);
+            free(locacao);
+            free(aux_locacao);
+
+            printf("Locacao reativado com sucesso! \n");
+        }
+    }
+    else
     {
 
-        if (locacao->cliente == NULL)
-        {
-            printf("Cliente nao existe");
-        }
-        else
+        if (file)
         {
 
             do
             {
-                printf(" Digite a data de locacao: \n");
+                printf(" Digite a data de locacao ( DD/MM/AAAA ): \n");
                 fgets(data_locacao, sizeof data_locacao, stdin);
 
-            } while (onlyNumberInput(data_locacao) == 0);
+            } while (onlyNumberInput(data_locacao) == 0 || DateValidation(data_locacao) == 0);
 
             do
             {
-                printf(" Digite a data de devolucao: \n");
+                printf(" Digite a data de devolucao ( DD/MM/AAAA ): \n");
                 fgets(data_devolucao, sizeof data_devolucao, stdin);
-            } while (onlyNumberInput(data_devolucao) == 0);
+            } while (onlyNumberInput(data_devolucao) == 0 || DateValidation(data_devolucao) == 0);
 
             strcpy(locacao->data_locacao, data_locacao);
             strcpy(locacao->data_devolucao, data_devolucao);
@@ -714,6 +767,8 @@ void updateRentalValues(void)
                 {
                     found = 1;
 
+                    printf(" Cadastro atualizado com sucesso! \n");
+
                     fseek(file, (menos_um) * sizeof(Locacao), SEEK_CUR);
 
                     fwrite(locacao, sizeof(Locacao), 1, file);
@@ -725,10 +780,10 @@ void updateRentalValues(void)
             free(locacao);
             free(aux_locacao);
         }
-    }
-    else
-    {
-        printf("Erro ao abrir o arquivo");
+        else
+        {
+            printf("Erro ao abrir o arquivo");
+        }
     }
 }
 
@@ -741,37 +796,48 @@ void deleteRentalValues(void)
     int found = 0;
 
     locacao = buscaLocacao();
-    if (file)
+
+    if (locacao == NULL)
     {
-
-        locacao->status = 0;
-
-        long int menos_um = -1;
-
-        // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
-
-        while (!feof(file) && !found)
-        {
-            fread(aux_locacao, sizeof(Locacao), 1, file);
-
-            if (strcmp(aux_locacao->cliente, locacao->cliente) == 0)
-            {
-                found = 1;
-
-                fseek(file, (menos_um) * sizeof(Locacao), SEEK_CUR);
-
-                fwrite(locacao, sizeof(Locacao), 1, file);
-            }
-        }
-        //////////////////////////////////
-
-        fclose(file);
-        free(locacao);
-        free(aux_locacao);
+        printf("Locacao inexistente \n");
     }
     else
     {
-        printf("Erro ao abrir o arquivo");
+
+        if (file)
+        {
+
+            locacao->status = 0;
+
+            long int menos_um = -1;
+
+            // https://github.com/CharlesEdu07/SIG-Customer/blob/main/customer.c
+
+            while (!feof(file) && !found)
+            {
+                fread(aux_locacao, sizeof(Locacao), 1, file);
+
+                if (strcmp(aux_locacao->cliente, locacao->cliente) == 0)
+                {
+                    found = 1;
+
+                    printf(" Locacao removida com sucesso! \n");
+
+                    fseek(file, (menos_um) * sizeof(Locacao), SEEK_CUR);
+
+                    fwrite(locacao, sizeof(Locacao), 1, file);
+                }
+            }
+            //////////////////////////////////
+
+            fclose(file);
+            free(locacao);
+            free(aux_locacao);
+        }
+        else
+        {
+            printf("Erro ao abrir o arquivo");
+        }
     }
 }
 
@@ -794,6 +860,7 @@ Locacao *inputRentalValues(void)
             system("cls||clear");
             printf("CPF invalido ou nao cadastrado\n");
             system("pause");
+            return NULL;
         }
 
     } while (CPFValidation(cliente) == False2 || verifyCPFInFile(cliente) == 0);
@@ -807,6 +874,7 @@ Locacao *inputRentalValues(void)
             system("cls||clear");
             printf("Placa invalida ou nao cadastrada\n");
             system("pause");
+            return NULL;
         }
 
     } while (carPlateValidation(placa) == False2 || verifyPlateInFile(placa) == 0);
@@ -829,6 +897,7 @@ Locacao *inputRentalValues(void)
     strcpy(locacao->data_locacao, data);
     strcpy(locacao->valor, valor);
     strcpy(locacao->data_devolucao, "Aberto");
+
     locacao->status = 1;
 
     return locacao;

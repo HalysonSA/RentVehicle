@@ -16,10 +16,13 @@ void menu_cadastrar_locacao()
     printf("=============================================\n");
     locacao = inputRentalValues();
 
-    gravaArquivoLocacao(locacao);
+    if (locacao)
+    {
+        printf(" Cadastro realizado com sucesso! \n");
+        gravaArquivoLocacao(locacao);
+    }
 
     printf("=============================================\n");
-    printf(" Cadastro realizado com sucesso! \n");
 }
 
 void menu_relatorio_locacao(Locacao *locacao)
@@ -50,14 +53,11 @@ void menu_editar_locacao(void)
     printf("=============================================\n");
     updateRentalValues();
     printf("=============================================\n");
-
-    printf(" Cadastro atualizado com sucesso! \n");
 }
 
 void menu_remover_locacao()
 {
     deleteRentalValues();
-    printf(" Locacao removida com sucesso! \n");
 }
 
 char menu_locacoes(void)

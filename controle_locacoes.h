@@ -1,10 +1,10 @@
 typedef struct
 {
     char valor[50];
-    char data_locacao[10];
-    char data_devolucao[10];
+    char data_locacao[15];
+    char data_devolucao[15];
     char cliente[15];
-    char placa[8];
+    char placa[10];
     char status;
 } Locacao;
 

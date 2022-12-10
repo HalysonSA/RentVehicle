@@ -90,7 +90,7 @@ Locacao *buscaLocacao(void)
 
     locacao = (Locacao *)malloc(sizeof(Locacao));
 
-    char placa[8];
+    char placa[10];
 
     do
     {

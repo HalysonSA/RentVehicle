@@ -10,15 +10,19 @@ Cliente *cliente;
 
 void menu_cadastro_cliente()
 {
-
     cliente = (Cliente *)malloc(sizeof(Cliente));
+
     printf("=============================================\n");
+
     cliente = inputClientValues();
 
-    gravaArquivoCliente(cliente);
+    if (cliente)
+    {
+        gravaArquivoCliente(cliente);
+        printf(" Cadastro realizado com sucesso! \n");
+    }
 
     printf("=============================================\n");
-    printf(" Cadastro realizado com sucesso! \n");
 }
 
 void menu_relatorio_cliente(Cliente *cliente)
@@ -50,13 +54,11 @@ void menu_editar_cliente()
     printf("=============================================\n");
     updateClientValues();
     printf("=============================================\n");
-    printf(" Cadastro atualizado com sucesso! \n");
 }
 
 void menu_remover_cliente()
 {
     deleteClientValues();
-    printf(" Cliente removido com sucesso! \n");
 }
 
 char menu_clientes(void)

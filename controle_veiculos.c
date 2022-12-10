@@ -11,15 +11,18 @@ Veiculo *veiculo;
 
 void menu_cadastrar_veiculo()
 {
-
     veiculo = (Veiculo *)malloc(10 * sizeof(Veiculo));
 
     printf("=============================================\n");
+
     veiculo = inputVehicleValues();
 
-    gravaArquivoVeiculo(veiculo);
+    if (veiculo)
+    {
+        gravaArquivoVeiculo(veiculo);
+        printf(" Cadastro realizado com sucesso! \n");
+    }
 
-    printf(" Cadastro realizado com sucesso! \n");
     printf("=============================================\n");
 }
 
@@ -52,13 +55,11 @@ void menu_editar_veiculo(void)
     printf("=============================================\n");
     updateVehicleValues();
     printf("=============================================\n");
-    printf(" Cadastro atualizado com sucesso! \n");
 }
 
 void menu_remover_veiculo()
 {
     deleteVehicleValues();
-    printf(" Veiculo removido com sucesso! \n");
 }
 
 char menu_veiculos(void)

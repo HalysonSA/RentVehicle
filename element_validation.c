@@ -123,7 +123,7 @@ int carPlateValidation(char plate[7])
     char plateLetters[5] = {plate[0], plate[1], plate[2], plate[4]};
     char plateNumbers[4] = {plate[3], plate[5], plate[6]};
 
-    if (isalpha(plateLetters[0]) && isalpha(plateLetters[1]) && isalpha(plateLetters[2]) && isalpha(plateLetters[3]) && isdigit(plateNumbers[0]) && isdigit(plateNumbers[1]) && isdigit(plateNumbers[2]) && ln == 7)
+    if (isalpha(plateLetters[0]) && isalpha(plateLetters[1]) && isalpha(plateLetters[2]) && isalpha(plateLetters[3]) && isdigit(plateNumbers[0]) && isdigit(plateNumbers[1]) && isdigit(plateNumbers[2]) && (ln == 7 || ln == 6))
     {
         system("cls||clear");
         return True1;
@@ -131,6 +131,7 @@ int carPlateValidation(char plate[7])
     else
     {
         system("cls||clear");
+
         printf("Digite no formato (AAA3A33) \n");
         return False1;
     }
