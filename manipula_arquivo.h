@@ -11,3 +11,4 @@ void listaVeiculos(void);
 void listaLocacoes(void);
 void listaClientesPorCidade(void);
 void listaVeiculosPorMarca(void);
+void listaClientesPorOrdemAlfabetica(void);

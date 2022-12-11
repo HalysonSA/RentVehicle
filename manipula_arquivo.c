@@ -180,6 +180,137 @@ void listaClientesPorCidade(void)
     fclose(fp);
 }
 
+void listaClientesPorOrdemAlfabetica(void)
+{
+    typedef struct auxCliente AuxCliente;
+
+    struct auxCliente
+    {
+        char *nome;
+        char *cpf;
+        char *cidade;
+        char *estado;
+        char *telefone;
+        char *rua;
+        char *bairro;
+
+        AuxCliente *prox;
+    };
+
+    FILE *fp;
+    int i, tam;
+    AuxCliente *novoCliente;
+    AuxCliente *lista;
+
+    Cliente *cliente = (Cliente *)malloc(sizeof(Cliente));
+
+    fp = fopen("clientes.dat", "rb");
+
+    if (fp == NULL)
+    {
+        printf("Ocorreu um erro na abertura do arquivo!\n");
+        controle_clientes();
+    }
+
+    lista = NULL;
+
+    while (fread(cliente, sizeof(Cliente), 1, fp))
+    {
+
+        novoCliente = (AuxCliente *)malloc(sizeof(AuxCliente));
+
+        tam = strlen(cliente->nome) + 1;
+        novoCliente->nome = (char *)malloc(tam * sizeof(char));
+        strcpy(novoCliente->nome, cliente->nome);
+
+        tam = strlen(cliente->cpf) + 1;
+        novoCliente->cpf = (char *)malloc(tam * sizeof(char));
+        strcpy(novoCliente->cpf, cliente->cpf);
+
+        tam = strlen(cliente->cidade) + 1;
+        novoCliente->cidade = (char *)malloc(tam * sizeof(char));
+        strcpy(novoCliente->cidade, cliente->cidade);
+
+        tam = strlen(cliente->estado) + 1;
+        novoCliente->estado = (char *)malloc(tam * sizeof(char));
+        strcpy(novoCliente->estado, cliente->estado);
+
+        tam = strlen(cliente->telefone) + 1;
+        novoCliente->telefone = (char *)malloc(tam * sizeof(char));
+        strcpy(novoCliente->telefone, cliente->telefone);
+
+        tam = strlen(cliente->rua) + 1;
+        novoCliente->rua = (char *)malloc(tam * sizeof(char));
+        strcpy(novoCliente->rua, cliente->rua);
+
+        tam = strlen(cliente->bairro) + 1;
+        novoCliente->bairro = (char *)malloc(tam * sizeof(char));
+        strcpy(novoCliente->bairro, cliente->bairro);
+
+        if (lista == NULL)
+        {
+
+            lista = novoCliente;
+            novoCliente->prox = NULL;
+            continue;
+        }
+        else if (strcmp(novoCliente->nome, lista->nome) < 0)
+        {
+
+            novoCliente->prox = lista;
+            lista = novoCliente;
+        }
+        else
+        {
+
+            AuxCliente *anter = lista;
+            AuxCliente *atual = lista->prox;
+            while ((atual != NULL) && strcmp(atual->nome, novoCliente->nome) < 0)
+            {
+                anter = atual;
+                atual = atual->prox;
+            }
+            anter->prox = novoCliente;
+            novoCliente->prox = atual;
+        }
+    }
+    fclose(fp);
+
+    novoCliente = lista;
+    i = 1;
+    while (novoCliente != NULL)
+    {
+        printf("=============================================\n");
+        printf("Nome: %s \n", novoCliente->nome);
+        printf("CPF: %s \n", novoCliente->cpf);
+        printf("Rua: %s \n", novoCliente->rua);
+        printf("Bairro: %s \n", novoCliente->bairro);
+        printf("Cidade: %s \n", novoCliente->cidade);
+        printf("Estado: %s \n", novoCliente->estado);
+        printf("Telefone: %s \n", novoCliente->telefone);
+        printf("=============================================\n");
+
+        novoCliente = novoCliente->prox;
+        i++;
+    }
+
+    novoCliente = lista;
+
+    while (lista != NULL)
+    {
+        lista = lista->prox;
+        free(novoCliente->nome);
+        free(novoCliente->cpf);
+        free(novoCliente->cidade);
+        free(novoCliente->estado);
+        free(novoCliente->telefone);
+        free(novoCliente->rua);
+        free(novoCliente->bairro);
+        free(novoCliente);
+        novoCliente = lista;
+    }
+}
+
 void listaVeiculos(void)
 {
     FILE *fp;

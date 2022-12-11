@@ -136,6 +136,7 @@ void controle_clientes()
             printf("==========================================\n");
             printf("======    1 - Relatorio clientes    ======\n");
             printf("======    2 - Relatorio por cidade  ======\n");
+            printf("======    3 - Ordem alfabetica      ======\n");
             printf("======    0 - Voltar ao menu        ======\n");
             printf("==========================================\n");
             char opc;
@@ -160,6 +161,14 @@ void controle_clientes()
                 printf("=============================================\n");
 
                 listaClientesPorCidade();
+                break;
+            case '3':
+                system("cls||clear");
+                printf("=============================================\n");
+                printf("====    Clientes por ordem alfabetica    ====\n");
+                printf("=============================================\n");
+
+                listaClientesPorOrdemAlfabetica();
                 break;
             default:
                 printf("Opcao invalida\n");
