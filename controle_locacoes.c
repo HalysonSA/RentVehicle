@@ -73,10 +73,10 @@ char menu_locacoes(void)
     printf("==========================================\n");
     printf("======     CONTROLE DE LOCACOES     ======\n");
     printf("======    1 - Cadastrar locacao     ======\n");
-    printf("======    2 - Relatorio locacoes    ======\n");
-    printf("======    3 - Editar locacao        ======\n");
-    printf("======    4 - Remover locacao       ======\n");
-    printf("======    5 - Buscar locacao        ======\n");
+    printf("======    2 - Editar locacao        ======\n");
+    printf("======    3 - Remover locacao       ======\n");
+    printf("======    4 - Buscar locacao        ======\n");
+    printf("======    5 - Relatorios            ======\n");
     printf("======    0 - Voltar ao menu        ======\n");
     printf("==========================================\n");
 
@@ -102,24 +102,17 @@ void controle_locacoes()
             menu_cadastrar_locacao();
             break;
         case '2':
-            system("cls||clear");
-            printf("=============================================\n");
-            printf("====  Relatorio de Locacoes cadastradas  ====\n");
-            printf("=============================================\n");
-            listaLocacoes();
-            break;
-        case '3':
 
             system("cls||clear");
             menu_editar_locacao();
 
             break;
-        case '4':
+        case '3':
             system("cls||clear");
             menu_remover_locacao();
             break;
 
-        case '5':
+        case '4':
             system("clear||cls");
             Locacao *locacao = (Locacao *)malloc(sizeof(Locacao));
             locacao = buscaLocacao();
@@ -134,6 +127,14 @@ void controle_locacoes()
             }
             printf("=============================================\n");
             break;
+        case '5':
+            system("cls||clear");
+            printf("=============================================\n");
+            printf("====  Relatorio de Locacoes cadastradas  ====\n");
+            printf("=============================================\n");
+            listaLocacoes();
+            break;
+
         default:
             printf("Opcao invalida\n");
             break;

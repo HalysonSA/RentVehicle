@@ -31,6 +31,8 @@ void menu_relatorio_veiculo(Veiculo *veiculo)
 
     if (veiculo[0].marca != NULL)
     {
+
+        printf("=============================================\n");
         if (veiculo->status == 1)
         {
             printf("Status: Ativo \n");
@@ -78,8 +80,7 @@ char menu_veiculos(void)
     printf("======    2 - Editar veiculo         ========\n");
     printf("======    3 - Remover veiculo        ========\n");
     printf("======    4 - Buscar veiculo         ========\n");
-    printf("======    5 - Relatorio veiculos     ========\n");
-    printf("======    6 - Relatorio por marca    ========\n");
+    printf("======    5 - Relatorios             ========\n");
     printf("======    0 - Voltar ao menu         ========\n");
     printf("=============================================\n");
 
@@ -105,13 +106,7 @@ void controle_veiculos()
             system("cls||clear");
             menu_cadastrar_veiculo();
             break;
-        case '5':
-            system("cls||clear");
-            printf("=============================================\n");
-            printf("====  Relatorio de veiculos cadastrados  ====\n");
-            printf("=============================================\n");
-            listaVeiculos();
-            break;
+
         case '2':
         {
             system("cls||clear");
@@ -140,14 +135,44 @@ void controle_veiculos()
             printf("=============================================\n");
             break;
 
-        case '6':
+        case '5':
             system("cls||clear");
-            printf("=============================================\n");
-            printf("====  Relatorio de veiculos por marca    ====\n");
-            printf("=============================================\n");
 
-            listaVeiculosPorMarca();
+            printf("=============================================\n");
+            printf("======    1 - Relatorio veiculos     ========\n");
+            printf("======    2 - Relatorio por marca    ========\n");
+            printf("======    0 - Voltar ao menu         ========\n");
+            printf("=============================================\n");
+            char opc;
+            printf("Digite a opcao desejada: ");
+            scanf("%c", &opc);
+            getchar();
+
+            switch (opc)
+            {
+            case '1':
+                system("cls||clear");
+                printf("=============================================\n");
+                printf("====  Relatorio de veiculos cadastrados  ====\n");
+                printf("=============================================\n");
+                listaVeiculos();
+                break;
+
+            case '2':
+                system("cls||clear");
+                printf("=============================================\n");
+                printf("====  Relatorio de veiculos por marca    ====\n");
+                printf("=============================================\n");
+                listaVeiculosPorMarca();
+                break;
+
+            default:
+                printf("Opcao invalida\n");
+                break;
+            }
+
             break;
+
         default:
             printf("Opcao invalida\n");
             break;
