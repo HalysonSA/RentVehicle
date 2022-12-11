@@ -28,8 +28,16 @@ void menu_cadastro_cliente()
 void menu_relatorio_cliente(Cliente *cliente)
 {
 
-    if (cliente[0].nome != NULL && cliente[0].status == 1)
+    if (cliente[0].nome != NULL)
     {
+        if (cliente->status == 1)
+        {
+            printf("Status: Ativo \n");
+        }
+        else
+        {
+            printf("Status: Inativo \n");
+        }
         printf("Nome: %s \n", cliente->nome);
         printf("CPF: %s \n", cliente->cpf);
         printf("Telefone %s \n", cliente->telefone);

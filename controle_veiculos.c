@@ -29,8 +29,16 @@ void menu_cadastrar_veiculo()
 void menu_relatorio_veiculo(Veiculo *veiculo)
 {
 
-    if (veiculo[0].marca != NULL && veiculo[0].status != 0)
+    if (veiculo[0].marca != NULL)
     {
+        if (veiculo->status == 1)
+        {
+            printf("Status: Ativo \n");
+        }
+        else
+        {
+            printf("Status: Inativo \n");
+        }
         printf("Marca do veiculo: %s \n", veiculo->marca);
         printf("Modelo do veiculo: %s \n", veiculo->modelo);
         printf("Ano do veiculo: %s \n", veiculo->ano);

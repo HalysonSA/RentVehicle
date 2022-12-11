@@ -27,8 +27,16 @@ void menu_cadastrar_locacao()
 
 void menu_relatorio_locacao(Locacao *locacao)
 {
-    if (locacao[0].valor != NULL && locacao[0].status != 0)
+    if (locacao[0].valor != NULL)
     {
+        if (locacao->status == 1)
+        {
+            printf("Status: Ativo \n");
+        }
+        else
+        {
+            printf("Status: Inativo \n");
+        }
         printf("Cliente: %s \n", locacao->cliente);
         printf("Veiculo: %s \n", locacao->placa);
         printf("Data de inicio da locacao: %s \n", locacao->data_locacao);
