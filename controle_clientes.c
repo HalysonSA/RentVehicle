@@ -30,6 +30,8 @@ void menu_relatorio_cliente(Cliente *cliente)
 
     if (cliente[0].nome != NULL)
     {
+
+        printf("=============================================\n");
         if (cliente->status == 1)
         {
             printf("Status: Ativo \n");
@@ -78,8 +80,7 @@ char menu_clientes(void)
     printf("======    2 - Editar cliente        ======\n");
     printf("======    3 - Remover cliente       ======\n");
     printf("======    4 - Buscar cliente        ======\n");
-    printf("======    5 - Relatorio clientes    ======\n");
-    printf("======    6 - Relatorio por cidade  ======\n");
+    printf("======    5 - Relatorios            ======\n");
     printf("======    0 - Voltar ao menu        ======\n");
     printf("==========================================\n");
 
@@ -103,15 +104,6 @@ void controle_clientes()
 
             system("cls||clear");
             menu_cadastro_cliente();
-            break;
-        case '5':
-
-            system("cls||clear");
-            printf("=============================================\n");
-            printf("====  Relatorio de clientes cadastrados  ====\n");
-            printf("=============================================\n");
-
-            listaClientes();
             break;
         case '2':
             system("cls||clear");
@@ -139,14 +131,43 @@ void controle_clientes()
             }
             printf("=============================================\n");
             break;
-        case '6':
+        case '5':
             system("cls||clear");
-            printf("=============================================\n");
-            printf("====  Relatorio de clientes por cidade  ====\n");
-            printf("=============================================\n");
+            printf("==========================================\n");
+            printf("======    1 - Relatorio clientes    ======\n");
+            printf("======    2 - Relatorio por cidade  ======\n");
+            printf("======    0 - Voltar ao menu        ======\n");
+            printf("==========================================\n");
+            char opc;
 
-            listaClientesPorCidade();
+            printf("Digite a opcao desejada: ");
+            scanf("%c", &opc);
+            getchar();
+            switch (opc)
+            {
+            case '1':
+                system("cls||clear");
+                printf("=============================================\n");
+                printf("====  Relatorio de clientes cadastrados  ====\n");
+                printf("=============================================\n");
+
+                listaClientes();
+                break;
+            case '2':
+                system("cls||clear");
+                printf("=============================================\n");
+                printf("====  Relatorio de clientes por cidade  ====\n");
+                printf("=============================================\n");
+
+                listaClientesPorCidade();
+                break;
+            default:
+                printf("Opcao invalida\n");
+                break;
+            }
+
             break;
+
         default:
             printf("Opcao invalida\n");
             break;
