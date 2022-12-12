@@ -1,4 +1,4 @@
-#**SIG-Rent-a-Car: Uma Locadora de Veículos**#
+**SIG-Rent-a-Car: Uma Locadora de Veículos**
 
 Uma locadora de veículos é um estabelecimento comercial que aluga carros e motos para
 os seus clientes, permitindo-os pagar pelo tempo de uso, de acordo com uma tabela de
