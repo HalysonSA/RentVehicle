@@ -1,6 +1,7 @@
+#**SIG-Rent-a-Car: Uma Locadora de Veículos**#
 
-gcc -c -Wall index.c element_validation.c element_input.c controle_clientes.c  controle_locacoes.c controle_veiculos.c menu_principal.c manipula_arquivo.c
-
-gcc -o index element_validation.o element_input.o  controle_locacoes.o controle_clientes.o menu_principal.o controle_veiculos.o index.o manipula_arquivo.o
-
-ASCII = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c"
+Uma locadora de veículos é um estabelecimento comercial que aluga carros e motos para
+os seus clientes, permitindo-os pagar pelo tempo de uso, de acordo com uma tabela de
+preço pré-definida. O presente projeto tem como objetivo desenvolver um programa de
+computador que possibilite aos administradores da locadora controlar os empréstimos de
+veículos, além de registrar o fluxo financeiro dessa loja, facilitando a gestão do negócio.
