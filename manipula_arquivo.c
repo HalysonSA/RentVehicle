@@ -5,6 +5,7 @@
 #include "controle_veiculos.h"
 #include "controle_locacoes.h"
 #include "element_validation.h"
+#include "menu_principal.h"
 
 Cliente *buscaCliente(void)
 {
@@ -29,7 +30,8 @@ Cliente *buscaCliente(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        controle_clientes();
+        system("pause");
+        menu_principal();
     }
     while (!feof(fp))
     {
@@ -67,7 +69,8 @@ Veiculo *buscaVeiculo(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        controle_veiculos();
+        system("pause");
+        menu_principal();
     }
     while (!feof(fp))
     {
@@ -104,7 +107,8 @@ Locacao *buscaLocacao(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        controle_locacoes();
+        system("pause");
+        menu_principal();
     }
     while (!feof(fp))
     {
@@ -133,7 +137,8 @@ void listaClientes(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        controle_clientes();
+        system("pause");
+        menu_principal();
     }
     while (fread(cliente, sizeof(Cliente), 1, fp))
     {
@@ -159,7 +164,8 @@ void listaClientesPorCidade(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        controle_clientes();
+        system("pause");
+        menu_principal();
     }
 
     while (fread(cliente, sizeof(Cliente), 1, fp))
@@ -209,7 +215,8 @@ void listaClientesPorOrdemAlfabetica(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        controle_clientes();
+        system("pause");
+        menu_principal();
     }
 
     lista = NULL;
@@ -323,7 +330,8 @@ void listaVeiculos(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        controle_veiculos();
+        system("pause");
+        menu_principal();
     }
 
     while (fread(veiculo, sizeof(Veiculo), 1, fp))
@@ -349,7 +357,8 @@ void listaVeiculosPorMarca(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        controle_veiculos();
+        system("pause");
+        menu_principal();
     }
 
     while (fread(veiculo, sizeof(Veiculo), 1, fp))
@@ -382,7 +391,8 @@ void listaLocacoes(void)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        controle_locacoes();
+        system("pause");
+        menu_principal();
     }
     while (fread(locacao, sizeof(Locacao), 1, fp))
     {
@@ -399,8 +409,8 @@ void gravaArquivoCliente(Cliente *cliente)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        getchar();
-        exit(1);
+        system("pause");
+        menu_principal();
     }
     fwrite(cliente, sizeof(Cliente), 1, fp);
     fclose(fp);
@@ -413,8 +423,8 @@ void gravaArquivoVeiculo(Veiculo *veiculo)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        getchar();
-        exit(1);
+        system("pause");
+        menu_principal();
     }
     fwrite(veiculo, sizeof(Veiculo), 1, fp);
     fclose(fp);
@@ -427,8 +437,8 @@ void gravaArquivoLocacao(Locacao *locacao)
     if (fp == NULL)
     {
         printf("Ocorreu um erro na abertura do arquivo!\n");
-        getchar();
-        exit(1);
+        system("pause");
+        menu_principal();
     }
     fwrite(locacao, sizeof(Locacao), 1, fp);
     fclose(fp);
