@@ -179,7 +179,8 @@ Veiculo *inputVehicleValues(void)
         {
             system("cls||clear");
             printf("Placa ja cadastrada! \n");
-            system("pause");
+            printf("Pressione qualquer tecla para continuar... \n");
+            getchar();
             return NULL;
         }
 
@@ -269,7 +270,8 @@ Cliente *inputClientValues(void)
         {
             system("cls||clear");
             printf("CPF ja cadastrado! \n");
-            system("pause");
+            printf("Pressione qualquer tecla para continuar... \n");
+            getchar();
             return NULL;
         }
 
@@ -859,7 +861,8 @@ Locacao *inputRentalValues(void)
         {
             system("cls||clear");
             printf("CPF invalido ou nao cadastrado\n");
-            system("pause");
+            printf("Pressione qualquer tecla para continuar... \n");
+            getchar();
             return NULL;
         }
 
@@ -873,7 +876,8 @@ Locacao *inputRentalValues(void)
         {
             system("cls||clear");
             printf("Placa invalida ou nao cadastrada\n");
-            system("pause");
+            printf("Pressione qualquer tecla para continuar... \n");
+            getchar();
             return NULL;
         }
 
