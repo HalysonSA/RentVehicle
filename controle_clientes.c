@@ -179,10 +179,11 @@ void controle_clientes()
 
         default:
             printf("Opcao invalida\n");
-            printf("Pressione qualquer tecla para continuar...");
-            getchar();
             break;
         }
+
+        printf("Pressione enter para continuar...\n");
+        getchar();
 
         system("cls||clear");
 
